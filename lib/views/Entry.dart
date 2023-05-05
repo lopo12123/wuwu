@@ -18,7 +18,12 @@ class EntryView extends StatelessWidget {
           child: AppBar(
             title: Text('w: ${Get.width} h: ${Get.height}'),
             actions: [
-
+              IconButton(
+                onPressed: () {
+                  windowManager.close();
+                },
+                icon: Icon(Icons.close),
+              ),
             ],
           ),
         ),
