@@ -31,7 +31,9 @@ dependencies:
   flutter:
     sdk: flutter
   get:
+  logger:
   window_manager:
+  windows_single_instance:
 
 
   # The following adds the Cupertino Icons font to your application.
