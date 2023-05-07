@@ -29,6 +29,7 @@ environment:
 # versions available, run `flutter pub outdated`.
 dependencies:
   ffi:
+  flip_board:
   flutter:
     sdk: flutter
   get:
