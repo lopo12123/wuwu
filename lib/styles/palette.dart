@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
-abstract class MyColors {
+/// 调色盘
+abstract class Palette {
   static const transparent = Colors.transparent;
 }

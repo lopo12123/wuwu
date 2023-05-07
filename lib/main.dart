@@ -2,19 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:window_manager/window_manager.dart';
 import 'package:wuwu/routes/index.dart';
-import 'package:wuwu/styles/colors.dart';
+import 'package:wuwu/styles/palette.dart';
 
 Future<void> appPrelude() async {
   await windowManager.ensureInitialized();
 
-  WindowOptions o = const WindowOptions(
-    titleBarStyle: TitleBarStyle.hidden,
+  WindowOptions cfg = const WindowOptions(
     size: Size(800, 600),
     center: true,
-    backgroundColor: MyColors.transparent,
+    backgroundColor: Palette.transparent,
+    titleBarStyle: TitleBarStyle.hidden,
   );
 
-  windowManager.waitUntilReadyToShow(o, () async {
+  windowManager.waitUntilReadyToShow(cfg, () async {
     await windowManager.setAsFrameless();
     await windowManager.show();
     await windowManager.focus();
@@ -36,9 +36,10 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return AppFrame(
       child: GetMaterialApp(
+        debugShowCheckedModeBanner: false,
         title: 'wuwu',
         theme: ThemeData(
-          primarySwatch: Colors.blue,
+          primarySwatch: Colors.red,
         ),
         initialRoute: MyRoutes.entry,
         unknownRoute: invalidPage,

@@ -1,6 +1,6 @@
 import 'package:get/get.dart';
-import 'package:wuwu/views/Entry.dart';
-import 'package:wuwu/views/UnKnown.dart';
+import 'package:wuwu/views/entry.dart';
+import 'package:wuwu/views/unknown.dart';
 
 /// 路由
 abstract class MyRoutes {
