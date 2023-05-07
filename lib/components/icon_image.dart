@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 enum IconImage {
-  wuwu('images/icons/wuwu.png');
+  draw('images/icons/draw.png');
 
   final String src;
 

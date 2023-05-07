@@ -13,6 +13,12 @@ class ToolBar extends StatelessWidget implements PreferredSizeWidget {
   final bool noTitle;
   final List<Widget>? extraActions;
 
+  void handleMax() async {
+    (await windowManager.isMaximized())
+        ? windowManager.unmaximize()
+        : windowManager.maximize();
+  }
+
   const ToolBar({
     super.key,
     this.automaticallyImplyLeading = true,
@@ -27,6 +33,7 @@ class ToolBar extends StatelessWidget implements PreferredSizeWidget {
     return GestureDetector(
       behavior: HitTestBehavior.translucent,
       onPanStart: (details) => windowManager.startDragging(),
+      onDoubleTap: handleMax,
       child: AppBar(
         automaticallyImplyLeading: automaticallyImplyLeading,
         centerTitle: true,
@@ -39,11 +46,7 @@ class ToolBar extends StatelessWidget implements PreferredSizeWidget {
             icon: const Icon(Icons.minimize),
           ),
           IconButton(
-            onPressed: () async {
-              (await windowManager.isMaximized())
-                  ? windowManager.unmaximize()
-                  : windowManager.maximize();
-            },
+            onPressed: handleMax,
             icon: const Icon(Icons.fullscreen),
           ),
           IconButton(
