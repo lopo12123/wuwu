@@ -13,6 +13,12 @@ class ToolBar extends StatelessWidget implements PreferredSizeWidget {
   final bool noTitle;
   final List<Widget>? extraActions;
 
+  final tooltipTextStyle = const TextStyle(
+    color: Palette.b10,
+    fontSize: 14,
+    fontFamily: 'JBMono',
+  );
+
   void handleMax() async {
     (await windowManager.isMaximized())
         ? windowManager.unmaximize()
@@ -41,17 +47,29 @@ class ToolBar extends StatelessWidget implements PreferredSizeWidget {
         title: noTitle ? null : title,
         actions: [
           ...?extraActions,
-          IconButton(
-            onPressed: windowManager.minimize,
-            icon: const Icon(Icons.minimize),
+          Tooltip(
+            message: 'minimize',
+            textStyle: tooltipTextStyle,
+            child: IconButton(
+              onPressed: windowManager.minimize,
+              icon: const Icon(Icons.minimize),
+            ),
           ),
-          IconButton(
-            onPressed: handleMax,
-            icon: const Icon(Icons.fullscreen),
+          Tooltip(
+            message: 'maximize',
+            textStyle: tooltipTextStyle,
+            child: IconButton(
+              onPressed: handleMax,
+              icon: const Icon(Icons.fullscreen),
+            ),
           ),
-          IconButton(
-            onPressed: windowManager.close,
-            icon: const Icon(Icons.close),
+          Tooltip(
+            message: 'close',
+            textStyle: tooltipTextStyle,
+            child: IconButton(
+              onPressed: windowManager.close,
+              icon: const Icon(Icons.close),
+            ),
           ),
         ],
       ),
