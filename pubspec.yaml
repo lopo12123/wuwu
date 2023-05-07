@@ -125,5 +125,5 @@ flutter_launcher_icons:
   ios: false
   windows:
     generate: true
-    image_path: 'assets/launcher/wuwu.png'
+    image_path: 'assets/launcher/draw.png'
     icon_size: 256
