@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 
 /// 自定义字体类名
 enum StyledTextFamily {
-  JBMono('JBMono');
+  JBMono('JBMono'),
+  ZhuoKai('ZhuoKai');
 
   final String _fontFamily;
 
@@ -60,6 +61,22 @@ class StyledText extends StatelessWidget {
     this.overflow,
     this.maxLines,
   }) : fontFamily = 'JBMono';
+
+  const StyledText.ZhuoKai(
+    this.data, {
+    super.key,
+    this.selectable = false,
+    this.color,
+    this.fontSize,
+    this.fontWeight,
+    this.lineHeight,
+    this.underline,
+    this.shadows,
+    this.textAlign,
+    this.textDirection,
+    this.overflow,
+    this.maxLines,
+  }) : fontFamily = 'ZhuoKai';
 
   @override
   Widget build(BuildContext context) {

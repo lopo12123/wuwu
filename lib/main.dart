@@ -37,12 +37,12 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return AppFrame(
       app: GetMaterialApp(
-        // debugShowCheckedModeBanner: false,
+        debugShowCheckedModeBanner: false,
         title: 'wuwu',
         theme: ThemeData(
           appBarTheme: const AppBarTheme(backgroundColor: Palette.b90),
           scaffoldBackgroundColor: Palette.b10,
-          fontFamily: StyledTextFamily.JBMono.name,
+          fontFamily: StyledTextFamily.ZhuoKai.name,
         ),
         initialRoute: MyRoutes.entry,
         unknownRoute: invalidPage,
