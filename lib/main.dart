@@ -36,13 +36,12 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AppFrame(
-      child: GetMaterialApp(
-        debugShowCheckedModeBanner: false,
+      app: GetMaterialApp(
+        // debugShowCheckedModeBanner: false,
         title: 'wuwu',
         theme: ThemeData(
-          appBarTheme: const AppBarTheme(
-            backgroundColor: Palette.b90,
-          ),
+          appBarTheme: const AppBarTheme(backgroundColor: Palette.b90),
+          scaffoldBackgroundColor: Palette.b10,
           fontFamily: StyledTextFamily.JBMono.name,
         ),
         initialRoute: MyRoutes.entry,
@@ -54,9 +53,9 @@ class MyApp extends StatelessWidget {
 }
 
 class AppFrame extends StatelessWidget {
-  final Widget child;
+  final Widget app;
 
-  const AppFrame({super.key, required this.child});
+  const AppFrame({super.key, required this.app});
 
   @override
   Widget build(BuildContext context) {
@@ -64,10 +63,17 @@ class AppFrame extends StatelessWidget {
       width: Get.width,
       height: Get.height,
       clipBehavior: Clip.antiAliasWithSaveLayer,
+      margin: const EdgeInsets.all(2),
       decoration: const BoxDecoration(
         borderRadius: BorderRadius.all(Radius.circular(8)),
+        boxShadow: [
+          BoxShadow(
+            color: Palette.b80,
+            blurRadius: 1,
+          ),
+        ],
       ),
-      child: child,
+      child: app,
     );
   }
 }

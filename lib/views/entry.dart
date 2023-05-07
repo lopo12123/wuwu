@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:window_manager/window_manager.dart';
 import 'package:wuwu/components/styled_text.dart';
+import 'package:wuwu/styles/palette.dart';
 import 'package:wuwu/utils/safe_print.dart';
 
 class EntryView extends StatelessWidget {
@@ -19,6 +20,7 @@ class EntryView extends StatelessWidget {
           },
           child: AppBar(
             title: Text('w: ${Get.width} h: ${Get.height}'),
+            backgroundColor: Palette.b90,
             actions: [
               IconButton(
                 onPressed: () {
