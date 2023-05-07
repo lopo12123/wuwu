@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:window_manager/window_manager.dart';
+import 'package:wuwu/components/icon_image.dart';
 import 'package:wuwu/components/styled_text.dart';
 import 'package:wuwu/components/tool_bar.dart';
 import 'package:wuwu/dialogs/base.dart';
@@ -14,7 +15,9 @@ class EntryView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const ToolBar(),
+      appBar: ToolBar(
+        leading: IconImage.use(IconImage.wuwu, size: 48),
+      ),
       body: Column(
         children: [
           ElevatedButton(
@@ -35,6 +38,7 @@ class EntryView extends StatelessWidget {
             },
             child: StyledText.JBMono('loading'),
           ),
+          Image.asset('images/icons/wuwu.png'),
         ],
       ),
     );
