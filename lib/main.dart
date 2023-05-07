@@ -37,7 +37,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return AppFrame(
       app: GetMaterialApp(
-        debugShowCheckedModeBanner: false,
+        // debugShowCheckedModeBanner: false,
         title: 'wuwu',
         theme: ThemeData(
           appBarTheme: const AppBarTheme(backgroundColor: Palette.b90),
@@ -66,12 +66,7 @@ class AppFrame extends StatelessWidget {
       margin: const EdgeInsets.all(2),
       decoration: const BoxDecoration(
         borderRadius: BorderRadius.all(Radius.circular(8)),
-        boxShadow: [
-          BoxShadow(
-            color: Palette.b80,
-            blurRadius: 1,
-          ),
-        ],
+        boxShadow: [BoxShadow(color: Palette.b80, blurRadius: 1)],
       ),
       child: app,
     );
