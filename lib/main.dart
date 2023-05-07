@@ -9,7 +9,7 @@ Future<void> appPrelude() async {
   await windowManager.ensureInitialized();
 
   WindowOptions cfg = const WindowOptions(
-    size: Size(800, 600),
+    size: Size(390, 800),
     center: true,
     backgroundColor: Palette.transparent,
     titleBarStyle: TitleBarStyle.hidden,
