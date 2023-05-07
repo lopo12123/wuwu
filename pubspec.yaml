@@ -32,6 +32,7 @@ dependencies:
   flip_board:
   flutter:
     sdk: flutter
+  gesture_password_widget:
   get:
   loading_animation_widget:
   logger:
