@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:window_manager/window_manager.dart';
+import 'package:wuwu/components/styled_text.dart';
+import 'package:wuwu/utils/safe_print.dart';
 
 class EntryView extends StatelessWidget {
   const EntryView({super.key});
@@ -27,6 +29,14 @@ class EntryView extends StatelessWidget {
             ],
           ),
         ),
+      ),
+      body: Column(
+        children: [
+          ElevatedButton(
+            onPressed: () {},
+            child: StyledText.JBMono('nonce'),
+          ),
+        ],
       ),
     );
   }

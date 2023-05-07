@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:window_manager/window_manager.dart';
+import 'package:wuwu/components/styled_text.dart';
 import 'package:wuwu/routes/index.dart';
 import 'package:wuwu/styles/palette.dart';
 
@@ -39,7 +40,10 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         title: 'wuwu',
         theme: ThemeData(
-          primarySwatch: Colors.red,
+          appBarTheme: const AppBarTheme(
+            backgroundColor: Palette.b90,
+          ),
+          fontFamily: StyledTextFamily.JBMono.name,
         ),
         initialRoute: MyRoutes.entry,
         unknownRoute: invalidPage,
