@@ -63,7 +63,7 @@ class AppFrame extends StatelessWidget {
     return Container(
       width: Get.width,
       height: Get.height,
-      clipBehavior: Clip.antiAlias,
+      clipBehavior: Clip.antiAliasWithSaveLayer,
       decoration: const BoxDecoration(
         borderRadius: BorderRadius.all(Radius.circular(8)),
       ),
