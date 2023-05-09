@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:window_manager/window_manager.dart';
+import 'package:windows_single_instance/windows_single_instance.dart';
 import 'package:wuwu/components/styled_text.dart';
 import 'package:wuwu/routes/index.dart';
 import 'package:wuwu/styles/palette.dart';
 
-Future<void> appPrelude() async {
+/// 配置窗口初始数据
+Future<void> setupWindowCfg() async {
   await windowManager.ensureInitialized();
 
   WindowOptions cfg = const WindowOptions(
@@ -22,10 +24,24 @@ Future<void> appPrelude() async {
   });
 }
 
-Future<void> main() async {
+/// 确保单实例运行
+Future<void> setupSingleTonCfg(List<String> args) async {
+  await WindowsSingleInstance.ensureSingleInstance(
+    args,
+    'wuwu',
+    onSecondWindow: (args) async {
+      // 唤起并聚焦
+      if (await windowManager.isMinimized()) await windowManager.restore();
+      windowManager.focus();
+    },
+  );
+}
+
+Future<void> main(List<String> args) async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  await appPrelude();
+  await setupWindowCfg();
+  await setupSingleTonCfg(args);
 
   runApp(const MyApp());
 }
