@@ -12,9 +12,7 @@ class EntryView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: ToolBar(
-        leading: Center(
-          child: IconImage.use(IconImage.draw, size: 32, color: Palette.b10),
-        ),
+        leading: IconImage.use(IconImage.draw, size: 32, color: Palette.b10),
       ),
       body: Center(
         child: Column(
@@ -22,7 +20,7 @@ class EntryView extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             niceClock,
-            GraphPassword(),
+            const GraphPassword(),
           ],
         ),
       ),

@@ -40,7 +40,7 @@ class ToolBar extends StatelessWidget implements PreferredSizeWidget {
     AppBar appBar = AppBar(
       automaticallyImplyLeading: automaticallyImplyLeading,
       centerTitle: true,
-      leading: leading,
+      leading: leading == null ? null : Center(child: leading),
       title: noTitle ? null : title,
       actions: PlatformSpec.isWin
           ? [
