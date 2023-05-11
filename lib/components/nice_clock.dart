@@ -17,10 +17,11 @@ import 'package:wuwu/styles/palette.dart';
 //   }
 // }
 
-final NiceClock = FlipClock(
+final niceClock = FlipClock(
   flipDirection: AxisDirection.down,
   width: 48,
   height: 64,
   digitSize: 32,
+  separatorWidth: 4,
   backgroundColor: Palette.b90,
 );
