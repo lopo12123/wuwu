@@ -4,7 +4,7 @@ import 'package:wuwu/components/graph_password.dart';
 import 'package:wuwu/components/icon_image.dart';
 import 'package:wuwu/components/nice_clock.dart';
 import 'package:wuwu/components/styled_text.dart';
-import 'package:wuwu/components/tool_bar.dart';
+import 'package:wuwu/platform_spec/components/tool_bar.dart';
 import 'package:wuwu/dialogs/loading.dart';
 import 'package:wuwu/styles/palette.dart';
 
