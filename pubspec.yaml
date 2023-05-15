@@ -34,6 +34,8 @@ dependencies:
     sdk: flutter
   gesture_password_widget:
   get:
+  isar:
+  isar_flutter_libs:
   loading_animation_widget:
   logger:
   win32:
@@ -49,6 +51,8 @@ dev_dependencies:
   flutter_launcher_icons:
   flutter_test:
     sdk: flutter
+  isar_generator:
+  build_runner:
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
