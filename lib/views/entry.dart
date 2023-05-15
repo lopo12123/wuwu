@@ -1,4 +1,3 @@
-import 'package:flip_board/flip_clock.dart';
 import 'package:flutter/material.dart';
 import 'package:wuwu/components/graph_password.dart';
 import 'package:wuwu/components/icon_image.dart';
