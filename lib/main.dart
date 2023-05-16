@@ -12,7 +12,7 @@ Future<void> main(List<String> args) async {
 
   await PlatformSpec.init(args);
 
-  // await DBStoreImpl.init();
+  await DBStoreImpl.init();
 
   runApp(const MyApp());
 }

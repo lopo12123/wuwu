@@ -13,7 +13,7 @@ class DBViewerView extends GetView {
       appBar: ToolBar(
         title: StyledText.ZhuoKai('DB Viewer'),
       ),
-      body: Column(
+      body: ListView(
         children: [
           ElevatedButton(
             onPressed: () {
@@ -26,6 +26,12 @@ class DBViewerView extends GetView {
               DBStoreImpl.dispose();
             },
             child: StyledText.ZhuoKai('dispose'),
+          ),
+          ElevatedButton(
+            onPressed: () {
+              DBStoreImpl.getTags();
+            },
+            child: StyledText.ZhuoKai('getTags'),
           ),
         ],
       ),
