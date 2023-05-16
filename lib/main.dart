@@ -4,12 +4,15 @@ import 'package:wuwu/components/styled_text.dart';
 import 'package:wuwu/platform_spec/platform_spec.dart';
 import 'package:wuwu/platform_spec/windows_spec.dart';
 import 'package:wuwu/routes/index.dart';
+import 'package:wuwu/stores/db_store.dart';
 import 'package:wuwu/styles/palette.dart';
 
 Future<void> main(List<String> args) async {
   WidgetsFlutterBinding.ensureInitialized();
 
   await PlatformSpec.init(args);
+
+  // await DBStoreImpl.init();
 
   runApp(const MyApp());
 }
