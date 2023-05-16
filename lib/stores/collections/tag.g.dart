@@ -22,8 +22,13 @@ const TagSchema = CollectionSchema(
       name: r'colorHex',
       type: IsarType.long,
     ),
-    r'tagName': PropertySchema(
+    r'createTime': PropertySchema(
       id: 1,
+      name: r'createTime',
+      type: IsarType.dateTime,
+    ),
+    r'tagName': PropertySchema(
+      id: 2,
       name: r'tagName',
       type: IsarType.string,
     )
@@ -64,7 +69,8 @@ void _tagSerialize(
   Map<Type, List<int>> allOffsets,
 ) {
   writer.writeLong(offsets[0], object.colorHex);
-  writer.writeString(offsets[1], object.tagName);
+  writer.writeDateTime(offsets[1], object.createTime);
+  writer.writeString(offsets[2], object.tagName);
 }
 
 Tag _tagDeserialize(
@@ -75,8 +81,9 @@ Tag _tagDeserialize(
 ) {
   final object = Tag();
   object.colorHex = reader.readLongOrNull(offsets[0]);
+  object.createTime = reader.readDateTimeOrNull(offsets[1]);
   object.id = id;
-  object.tagName = reader.readStringOrNull(offsets[1]);
+  object.tagName = reader.readStringOrNull(offsets[2]);
   return object;
 }
 
@@ -90,6 +97,8 @@ P _tagDeserializeProp<P>(
     case 0:
       return (reader.readLongOrNull(offset)) as P;
     case 1:
+      return (reader.readDateTimeOrNull(offset)) as P;
+    case 2:
       return (reader.readStringOrNull(offset)) as P;
     default:
       throw IsarError('Unknown property with id $propertyId');
@@ -244,6 +253,75 @@ extension TagQueryFilter on QueryBuilder<Tag, Tag, QFilterCondition> {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.between(
         property: r'colorHex',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+      ));
+    });
+  }
+
+  QueryBuilder<Tag, Tag, QAfterFilterCondition> createTimeIsNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNull(
+        property: r'createTime',
+      ));
+    });
+  }
+
+  QueryBuilder<Tag, Tag, QAfterFilterCondition> createTimeIsNotNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNotNull(
+        property: r'createTime',
+      ));
+    });
+  }
+
+  QueryBuilder<Tag, Tag, QAfterFilterCondition> createTimeEqualTo(
+      DateTime? value) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'createTime',
+        value: value,
+      ));
+    });
+  }
+
+  QueryBuilder<Tag, Tag, QAfterFilterCondition> createTimeGreaterThan(
+    DateTime? value, {
+    bool include = false,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'createTime',
+        value: value,
+      ));
+    });
+  }
+
+  QueryBuilder<Tag, Tag, QAfterFilterCondition> createTimeLessThan(
+    DateTime? value, {
+    bool include = false,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'createTime',
+        value: value,
+      ));
+    });
+  }
+
+  QueryBuilder<Tag, Tag, QAfterFilterCondition> createTimeBetween(
+    DateTime? lower,
+    DateTime? upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'createTime',
         lower: lower,
         includeLower: includeLower,
         upper: upper,
@@ -466,6 +544,18 @@ extension TagQuerySortBy on QueryBuilder<Tag, Tag, QSortBy> {
     });
   }
 
+  QueryBuilder<Tag, Tag, QAfterSortBy> sortByCreateTime() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'createTime', Sort.asc);
+    });
+  }
+
+  QueryBuilder<Tag, Tag, QAfterSortBy> sortByCreateTimeDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'createTime', Sort.desc);
+    });
+  }
+
   QueryBuilder<Tag, Tag, QAfterSortBy> sortByTagName() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'tagName', Sort.asc);
@@ -489,6 +579,18 @@ extension TagQuerySortThenBy on QueryBuilder<Tag, Tag, QSortThenBy> {
   QueryBuilder<Tag, Tag, QAfterSortBy> thenByColorHexDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'colorHex', Sort.desc);
+    });
+  }
+
+  QueryBuilder<Tag, Tag, QAfterSortBy> thenByCreateTime() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'createTime', Sort.asc);
+    });
+  }
+
+  QueryBuilder<Tag, Tag, QAfterSortBy> thenByCreateTimeDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'createTime', Sort.desc);
     });
   }
 
@@ -524,6 +626,12 @@ extension TagQueryWhereDistinct on QueryBuilder<Tag, Tag, QDistinct> {
     });
   }
 
+  QueryBuilder<Tag, Tag, QDistinct> distinctByCreateTime() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'createTime');
+    });
+  }
+
   QueryBuilder<Tag, Tag, QDistinct> distinctByTagName(
       {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
@@ -542,6 +650,12 @@ extension TagQueryProperty on QueryBuilder<Tag, Tag, QQueryProperty> {
   QueryBuilder<Tag, int?, QQueryOperations> colorHexProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'colorHex');
+    });
+  }
+
+  QueryBuilder<Tag, DateTime?, QQueryOperations> createTimeProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'createTime');
     });
   }
 

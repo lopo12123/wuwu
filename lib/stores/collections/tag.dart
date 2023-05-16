@@ -6,6 +6,9 @@ part 'tag.g.dart';
 class Tag {
   Id id = Isar.autoIncrement;
 
+  /// 创建时间
+  DateTime? createTime;
+
   /// 标签名
   String? tagName;
 
