@@ -7,6 +7,7 @@ class Tag {
   Id id = Isar.autoIncrement;
 
   /// 创建时间
+  @Index()
   DateTime? createTime;
 
   /// 标签名

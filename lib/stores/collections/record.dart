@@ -7,12 +7,15 @@ class Record {
   Id id = Isar.autoIncrement;
 
   /// 创建时间
+  @Index()
   DateTime? createTime;
 
   /// 是否是收入
+  @Index()
   bool? income;
 
   /// 金额
+  @Index()
   double? amount;
 
   /// 描述

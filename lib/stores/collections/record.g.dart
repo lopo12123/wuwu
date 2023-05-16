@@ -48,7 +48,47 @@ const RecordSchema = CollectionSchema(
   deserialize: _recordDeserialize,
   deserializeProp: _recordDeserializeProp,
   idName: r'id',
-  indexes: {},
+  indexes: {
+    r'createTime': IndexSchema(
+      id: -7085130145048818916,
+      name: r'createTime',
+      unique: false,
+      replace: false,
+      properties: [
+        IndexPropertySchema(
+          name: r'createTime',
+          type: IndexType.value,
+          caseSensitive: false,
+        )
+      ],
+    ),
+    r'income': IndexSchema(
+      id: -81116790606140643,
+      name: r'income',
+      unique: false,
+      replace: false,
+      properties: [
+        IndexPropertySchema(
+          name: r'income',
+          type: IndexType.value,
+          caseSensitive: false,
+        )
+      ],
+    ),
+    r'amount': IndexSchema(
+      id: 3252599345080253594,
+      name: r'amount',
+      unique: false,
+      replace: false,
+      properties: [
+        IndexPropertySchema(
+          name: r'amount',
+          type: IndexType.value,
+          caseSensitive: false,
+        )
+      ],
+    )
+  },
   links: {},
   embeddedSchemas: {},
   getId: _recordGetId,
@@ -147,6 +187,30 @@ extension RecordQueryWhereSort on QueryBuilder<Record, Record, QWhere> {
       return query.addWhereClause(const IdWhereClause.any());
     });
   }
+
+  QueryBuilder<Record, Record, QAfterWhere> anyCreateTime() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addWhereClause(
+        const IndexWhereClause.any(indexName: r'createTime'),
+      );
+    });
+  }
+
+  QueryBuilder<Record, Record, QAfterWhere> anyIncome() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addWhereClause(
+        const IndexWhereClause.any(indexName: r'income'),
+      );
+    });
+  }
+
+  QueryBuilder<Record, Record, QAfterWhere> anyAmount() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addWhereClause(
+        const IndexWhereClause.any(indexName: r'amount'),
+      );
+    });
+  }
 }
 
 extension RecordQueryWhere on QueryBuilder<Record, Record, QWhereClause> {
@@ -210,6 +274,290 @@ extension RecordQueryWhere on QueryBuilder<Record, Record, QWhereClause> {
         lower: lowerId,
         includeLower: includeLower,
         upper: upperId,
+        includeUpper: includeUpper,
+      ));
+    });
+  }
+
+  QueryBuilder<Record, Record, QAfterWhereClause> createTimeIsNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addWhereClause(IndexWhereClause.equalTo(
+        indexName: r'createTime',
+        value: [null],
+      ));
+    });
+  }
+
+  QueryBuilder<Record, Record, QAfterWhereClause> createTimeIsNotNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addWhereClause(IndexWhereClause.between(
+        indexName: r'createTime',
+        lower: [null],
+        includeLower: false,
+        upper: [],
+      ));
+    });
+  }
+
+  QueryBuilder<Record, Record, QAfterWhereClause> createTimeEqualTo(
+      DateTime? createTime) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addWhereClause(IndexWhereClause.equalTo(
+        indexName: r'createTime',
+        value: [createTime],
+      ));
+    });
+  }
+
+  QueryBuilder<Record, Record, QAfterWhereClause> createTimeNotEqualTo(
+      DateTime? createTime) {
+    return QueryBuilder.apply(this, (query) {
+      if (query.whereSort == Sort.asc) {
+        return query
+            .addWhereClause(IndexWhereClause.between(
+              indexName: r'createTime',
+              lower: [],
+              upper: [createTime],
+              includeUpper: false,
+            ))
+            .addWhereClause(IndexWhereClause.between(
+              indexName: r'createTime',
+              lower: [createTime],
+              includeLower: false,
+              upper: [],
+            ));
+      } else {
+        return query
+            .addWhereClause(IndexWhereClause.between(
+              indexName: r'createTime',
+              lower: [createTime],
+              includeLower: false,
+              upper: [],
+            ))
+            .addWhereClause(IndexWhereClause.between(
+              indexName: r'createTime',
+              lower: [],
+              upper: [createTime],
+              includeUpper: false,
+            ));
+      }
+    });
+  }
+
+  QueryBuilder<Record, Record, QAfterWhereClause> createTimeGreaterThan(
+    DateTime? createTime, {
+    bool include = false,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addWhereClause(IndexWhereClause.between(
+        indexName: r'createTime',
+        lower: [createTime],
+        includeLower: include,
+        upper: [],
+      ));
+    });
+  }
+
+  QueryBuilder<Record, Record, QAfterWhereClause> createTimeLessThan(
+    DateTime? createTime, {
+    bool include = false,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addWhereClause(IndexWhereClause.between(
+        indexName: r'createTime',
+        lower: [],
+        upper: [createTime],
+        includeUpper: include,
+      ));
+    });
+  }
+
+  QueryBuilder<Record, Record, QAfterWhereClause> createTimeBetween(
+    DateTime? lowerCreateTime,
+    DateTime? upperCreateTime, {
+    bool includeLower = true,
+    bool includeUpper = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addWhereClause(IndexWhereClause.between(
+        indexName: r'createTime',
+        lower: [lowerCreateTime],
+        includeLower: includeLower,
+        upper: [upperCreateTime],
+        includeUpper: includeUpper,
+      ));
+    });
+  }
+
+  QueryBuilder<Record, Record, QAfterWhereClause> incomeIsNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addWhereClause(IndexWhereClause.equalTo(
+        indexName: r'income',
+        value: [null],
+      ));
+    });
+  }
+
+  QueryBuilder<Record, Record, QAfterWhereClause> incomeIsNotNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addWhereClause(IndexWhereClause.between(
+        indexName: r'income',
+        lower: [null],
+        includeLower: false,
+        upper: [],
+      ));
+    });
+  }
+
+  QueryBuilder<Record, Record, QAfterWhereClause> incomeEqualTo(bool? income) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addWhereClause(IndexWhereClause.equalTo(
+        indexName: r'income',
+        value: [income],
+      ));
+    });
+  }
+
+  QueryBuilder<Record, Record, QAfterWhereClause> incomeNotEqualTo(
+      bool? income) {
+    return QueryBuilder.apply(this, (query) {
+      if (query.whereSort == Sort.asc) {
+        return query
+            .addWhereClause(IndexWhereClause.between(
+              indexName: r'income',
+              lower: [],
+              upper: [income],
+              includeUpper: false,
+            ))
+            .addWhereClause(IndexWhereClause.between(
+              indexName: r'income',
+              lower: [income],
+              includeLower: false,
+              upper: [],
+            ));
+      } else {
+        return query
+            .addWhereClause(IndexWhereClause.between(
+              indexName: r'income',
+              lower: [income],
+              includeLower: false,
+              upper: [],
+            ))
+            .addWhereClause(IndexWhereClause.between(
+              indexName: r'income',
+              lower: [],
+              upper: [income],
+              includeUpper: false,
+            ));
+      }
+    });
+  }
+
+  QueryBuilder<Record, Record, QAfterWhereClause> amountIsNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addWhereClause(IndexWhereClause.equalTo(
+        indexName: r'amount',
+        value: [null],
+      ));
+    });
+  }
+
+  QueryBuilder<Record, Record, QAfterWhereClause> amountIsNotNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addWhereClause(IndexWhereClause.between(
+        indexName: r'amount',
+        lower: [null],
+        includeLower: false,
+        upper: [],
+      ));
+    });
+  }
+
+  QueryBuilder<Record, Record, QAfterWhereClause> amountEqualTo(
+      double? amount) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addWhereClause(IndexWhereClause.equalTo(
+        indexName: r'amount',
+        value: [amount],
+      ));
+    });
+  }
+
+  QueryBuilder<Record, Record, QAfterWhereClause> amountNotEqualTo(
+      double? amount) {
+    return QueryBuilder.apply(this, (query) {
+      if (query.whereSort == Sort.asc) {
+        return query
+            .addWhereClause(IndexWhereClause.between(
+              indexName: r'amount',
+              lower: [],
+              upper: [amount],
+              includeUpper: false,
+            ))
+            .addWhereClause(IndexWhereClause.between(
+              indexName: r'amount',
+              lower: [amount],
+              includeLower: false,
+              upper: [],
+            ));
+      } else {
+        return query
+            .addWhereClause(IndexWhereClause.between(
+              indexName: r'amount',
+              lower: [amount],
+              includeLower: false,
+              upper: [],
+            ))
+            .addWhereClause(IndexWhereClause.between(
+              indexName: r'amount',
+              lower: [],
+              upper: [amount],
+              includeUpper: false,
+            ));
+      }
+    });
+  }
+
+  QueryBuilder<Record, Record, QAfterWhereClause> amountGreaterThan(
+    double? amount, {
+    bool include = false,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addWhereClause(IndexWhereClause.between(
+        indexName: r'amount',
+        lower: [amount],
+        includeLower: include,
+        upper: [],
+      ));
+    });
+  }
+
+  QueryBuilder<Record, Record, QAfterWhereClause> amountLessThan(
+    double? amount, {
+    bool include = false,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addWhereClause(IndexWhereClause.between(
+        indexName: r'amount',
+        lower: [],
+        upper: [amount],
+        includeUpper: include,
+      ));
+    });
+  }
+
+  QueryBuilder<Record, Record, QAfterWhereClause> amountBetween(
+    double? lowerAmount,
+    double? upperAmount, {
+    bool includeLower = true,
+    bool includeUpper = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addWhereClause(IndexWhereClause.between(
+        indexName: r'amount',
+        lower: [lowerAmount],
+        includeLower: includeLower,
+        upper: [upperAmount],
         includeUpper: includeUpper,
       ));
     });

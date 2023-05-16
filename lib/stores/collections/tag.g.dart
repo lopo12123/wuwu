@@ -38,7 +38,21 @@ const TagSchema = CollectionSchema(
   deserialize: _tagDeserialize,
   deserializeProp: _tagDeserializeProp,
   idName: r'id',
-  indexes: {},
+  indexes: {
+    r'createTime': IndexSchema(
+      id: -7085130145048818916,
+      name: r'createTime',
+      unique: false,
+      replace: false,
+      properties: [
+        IndexPropertySchema(
+          name: r'createTime',
+          type: IndexType.value,
+          caseSensitive: false,
+        )
+      ],
+    )
+  },
   links: {},
   embeddedSchemas: {},
   getId: _tagGetId,
@@ -123,6 +137,14 @@ extension TagQueryWhereSort on QueryBuilder<Tag, Tag, QWhere> {
       return query.addWhereClause(const IdWhereClause.any());
     });
   }
+
+  QueryBuilder<Tag, Tag, QAfterWhere> anyCreateTime() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addWhereClause(
+        const IndexWhereClause.any(indexName: r'createTime'),
+      );
+    });
+  }
 }
 
 extension TagQueryWhere on QueryBuilder<Tag, Tag, QWhereClause> {
@@ -186,6 +208,116 @@ extension TagQueryWhere on QueryBuilder<Tag, Tag, QWhereClause> {
         lower: lowerId,
         includeLower: includeLower,
         upper: upperId,
+        includeUpper: includeUpper,
+      ));
+    });
+  }
+
+  QueryBuilder<Tag, Tag, QAfterWhereClause> createTimeIsNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addWhereClause(IndexWhereClause.equalTo(
+        indexName: r'createTime',
+        value: [null],
+      ));
+    });
+  }
+
+  QueryBuilder<Tag, Tag, QAfterWhereClause> createTimeIsNotNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addWhereClause(IndexWhereClause.between(
+        indexName: r'createTime',
+        lower: [null],
+        includeLower: false,
+        upper: [],
+      ));
+    });
+  }
+
+  QueryBuilder<Tag, Tag, QAfterWhereClause> createTimeEqualTo(
+      DateTime? createTime) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addWhereClause(IndexWhereClause.equalTo(
+        indexName: r'createTime',
+        value: [createTime],
+      ));
+    });
+  }
+
+  QueryBuilder<Tag, Tag, QAfterWhereClause> createTimeNotEqualTo(
+      DateTime? createTime) {
+    return QueryBuilder.apply(this, (query) {
+      if (query.whereSort == Sort.asc) {
+        return query
+            .addWhereClause(IndexWhereClause.between(
+              indexName: r'createTime',
+              lower: [],
+              upper: [createTime],
+              includeUpper: false,
+            ))
+            .addWhereClause(IndexWhereClause.between(
+              indexName: r'createTime',
+              lower: [createTime],
+              includeLower: false,
+              upper: [],
+            ));
+      } else {
+        return query
+            .addWhereClause(IndexWhereClause.between(
+              indexName: r'createTime',
+              lower: [createTime],
+              includeLower: false,
+              upper: [],
+            ))
+            .addWhereClause(IndexWhereClause.between(
+              indexName: r'createTime',
+              lower: [],
+              upper: [createTime],
+              includeUpper: false,
+            ));
+      }
+    });
+  }
+
+  QueryBuilder<Tag, Tag, QAfterWhereClause> createTimeGreaterThan(
+    DateTime? createTime, {
+    bool include = false,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addWhereClause(IndexWhereClause.between(
+        indexName: r'createTime',
+        lower: [createTime],
+        includeLower: include,
+        upper: [],
+      ));
+    });
+  }
+
+  QueryBuilder<Tag, Tag, QAfterWhereClause> createTimeLessThan(
+    DateTime? createTime, {
+    bool include = false,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addWhereClause(IndexWhereClause.between(
+        indexName: r'createTime',
+        lower: [],
+        upper: [createTime],
+        includeUpper: include,
+      ));
+    });
+  }
+
+  QueryBuilder<Tag, Tag, QAfterWhereClause> createTimeBetween(
+    DateTime? lowerCreateTime,
+    DateTime? upperCreateTime, {
+    bool includeLower = true,
+    bool includeUpper = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addWhereClause(IndexWhereClause.between(
+        indexName: r'createTime',
+        lower: [lowerCreateTime],
+        includeLower: includeLower,
+        upper: [upperCreateTime],
         includeUpper: includeUpper,
       ));
     });
