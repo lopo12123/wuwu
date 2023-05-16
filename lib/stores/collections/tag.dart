@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:isar/isar.dart';
 
 part 'tag.g.dart';
@@ -15,4 +17,18 @@ class Tag {
 
   /// 标签颜色十六进制值
   int? colorHex;
+
+  Map<String, dynamic> toJson() {
+    return {
+      'id': id,
+      'createTime': createTime?.toIso8601String(),
+      'tagName': tagName,
+      'colorHex': colorHex,
+    };
+  }
+
+  @override
+  String toString() {
+    return jsonEncode(toJson());
+  }
 }

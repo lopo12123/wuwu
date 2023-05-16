@@ -23,4 +23,21 @@ class Record {
 
   /// 标签
   List<int>? tags;
+
+
+  Map<String, dynamic> toJson() {
+    return {
+      'id': id,
+      'createTime': createTime?.toIso8601String(),
+      'income': income,
+      'amount': amount,
+      'desc': desc,
+      'tags': tags,
+    };
+  }
+
+  @override
+  String toString() {
+    return jsonEncode(toJson());
+  }
 }
