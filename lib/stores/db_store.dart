@@ -32,7 +32,7 @@ abstract class DBStoreImpl {
   // region lifecycle
   static Future<void> init() async {
     if (_handle?.isOpen == true) {
-      SafePrint.warn('[DBStoreImpl] re-init (skip)');
+      SafePrint.info('[DBStoreImpl] re-init (skip)');
       return;
     }
 

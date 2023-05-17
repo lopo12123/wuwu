@@ -52,7 +52,7 @@ class SearchBoxDebounce extends GetView<_SearchBoxDebounceController> {
         .observe(onConfirmed);
 
     return Container(
-      width: 279,
+      width: 260,
       height: 40,
       margin: const EdgeInsets.symmetric(vertical: 16),
       padding: const EdgeInsets.symmetric(horizontal: 16),

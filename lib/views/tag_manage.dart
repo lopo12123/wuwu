@@ -31,7 +31,7 @@ class _TagItem extends StatelessWidget {
           ),
           Expanded(
             child: StyledText.ShouShu(
-              tag.tagName ?? '???',
+              tag.tagName ?? '<暂无标签名>',
               fontSize: 14,
             ).paddingSymmetric(horizontal: 8),
           ),
@@ -47,10 +47,26 @@ class _TagItem extends StatelessWidget {
 }
 
 class _TagManageController extends GetxController {
-  List<Tag> get tags => GlobalStoreImpl.store.tags;
+  RxList<Tag> tagList = <Tag>[].obs;
 
   Future<void> syncTags([bool toast = true]) async {
     await GlobalStoreImpl.store.init(toast: toast, tag: true);
+    tagList(GlobalStoreImpl.store.tags);
+  }
+
+  Future<void> searchTags(String part) async {
+    if (part.isEmpty) {
+      syncTags(false);
+    } else {
+      List<Tag> filtered = GlobalStoreImpl.store.tags
+          .where((tag) => tag.tagName?.contains(part) ?? false)
+          .toList();
+      tagList(filtered);
+
+      print(filtered);
+      print(GlobalStoreImpl.store.tags
+          .map((element) => element.tagName?.contains(part) ?? false));
+    }
   }
 
   @override
@@ -69,22 +85,34 @@ class TagManageView extends GetView<_TagManageController> {
     Get.put(_TagManageController());
 
     return Scaffold(
-        appBar: const ToolBar(
-          title: StyledText.ShouShu('标签管理'),
-        ),
+        appBar: const ToolBar(title: StyledText.XiaoBai('标签管理')),
         body: Column(
           children: [
-            SearchBoxDebounce(onConfirmed: (str) {
-              SafePrint.info(str);
-            }),
+            Row(
+              children: [
+                SearchBoxDebounce(
+                  hintText: '输入标签名开始查找',
+                  onConfirmed: controller.searchTags,
+                ),
+                // todo
+                IconButton(
+                  icon: Icon(Icons.add),
+                  onPressed: () {
+                    SafePrint.info('创建标签');
+                  },
+                ),
+              ],
+            ),
             Expanded(
               child: RefreshIndicator(
                 onRefresh: controller.syncTags,
                 child: Obx(
                   () => ListView(
-                    padding:
-                        const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-                    children: controller.tags.map((tag) {
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 16,
+                      vertical: 8,
+                    ),
+                    children: controller.tagList.map((tag) {
                       return _TagItem(tag: tag);
                     }).toList(),
                   ),
