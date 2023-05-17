@@ -2,10 +2,10 @@ import 'dart:convert';
 
 import 'package:isar/isar.dart';
 
-part 'record.g.dart';
+part 'consumption.g.dart';
 
 @collection
-class Record {
+class Consumption {
   Id id = Isar.autoIncrement;
 
   /// 创建时间

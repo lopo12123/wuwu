@@ -7,14 +7,16 @@ import 'package:wuwu/stores/collections/tag.dart';
 import 'package:wuwu/utils/safe_print.dart';
 
 abstract class DBStoreImpl {
-  // region tag
-  static Future<Result> getTags() async {
+  // region 标签
+  /// 获取所有标签
+  static Future<Result<List<Tag>, String>> getAllTags() async {
     if (_handle == null) return Result.err('数据库初始化失败');
 
-    var r = await _handle!.tags.filter().idEqualTo(32287907).findAll();
-    SafePrint.info(r);
+    var r = await _handle!.tags.where().sortByCreateTime().findAll();
 
-    return Result.ok();
+    SafePrint.info(await _handle!.tags.where().sortByCreateTime().findAll());
+
+    return Result.ok(r);
   }
 
   // endregion

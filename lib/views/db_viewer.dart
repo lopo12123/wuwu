@@ -29,7 +29,7 @@ class DBViewerView extends GetView {
           ),
           ElevatedButton(
             onPressed: () {
-              DBStoreImpl.getTags();
+              DBStoreImpl.getAllTags();
             },
             child: StyledText.ZhuoKai('getTags'),
           ),

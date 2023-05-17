@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'record.dart';
+part of 'consumption.dart';
 
 // **************************************************************************
 // IsarCollectionGenerator
@@ -9,13 +9,13 @@ part of 'record.dart';
 // coverage:ignore-file
 // ignore_for_file: duplicate_ignore, non_constant_identifier_names, constant_identifier_names, invalid_use_of_protected_member, unnecessary_cast, prefer_const_constructors, lines_longer_than_80_chars, require_trailing_commas, inference_failure_on_function_invocation, unnecessary_parenthesis, unnecessary_raw_strings, unnecessary_null_checks, join_return_with_assignment, prefer_final_locals, avoid_js_rounded_ints, avoid_positional_boolean_parameters, always_specify_types
 
-extension GetRecordCollection on Isar {
-  IsarCollection<Record> get records => this.collection();
+extension GetConsumptionCollection on Isar {
+  IsarCollection<Consumption> get consumptions => this.collection();
 }
 
-const RecordSchema = CollectionSchema(
-  name: r'Record',
-  id: -5560585825827271694,
+const ConsumptionSchema = CollectionSchema(
+  name: r'Consumption',
+  id: -1960512473907227800,
   properties: {
     r'amount': PropertySchema(
       id: 0,
@@ -43,10 +43,10 @@ const RecordSchema = CollectionSchema(
       type: IsarType.longList,
     )
   },
-  estimateSize: _recordEstimateSize,
-  serialize: _recordSerialize,
-  deserialize: _recordDeserialize,
-  deserializeProp: _recordDeserializeProp,
+  estimateSize: _consumptionEstimateSize,
+  serialize: _consumptionSerialize,
+  deserialize: _consumptionDeserialize,
+  deserializeProp: _consumptionDeserializeProp,
   idName: r'id',
   indexes: {
     r'createTime': IndexSchema(
@@ -91,14 +91,14 @@ const RecordSchema = CollectionSchema(
   },
   links: {},
   embeddedSchemas: {},
-  getId: _recordGetId,
-  getLinks: _recordGetLinks,
-  attach: _recordAttach,
+  getId: _consumptionGetId,
+  getLinks: _consumptionGetLinks,
+  attach: _consumptionAttach,
   version: '3.1.0+1',
 );
 
-int _recordEstimateSize(
-  Record object,
+int _consumptionEstimateSize(
+  Consumption object,
   List<int> offsets,
   Map<Type, List<int>> allOffsets,
 ) {
@@ -118,8 +118,8 @@ int _recordEstimateSize(
   return bytesCount;
 }
 
-void _recordSerialize(
-  Record object,
+void _consumptionSerialize(
+  Consumption object,
   IsarWriter writer,
   List<int> offsets,
   Map<Type, List<int>> allOffsets,
@@ -131,13 +131,13 @@ void _recordSerialize(
   writer.writeLongList(offsets[4], object.tags);
 }
 
-Record _recordDeserialize(
+Consumption _consumptionDeserialize(
   Id id,
   IsarReader reader,
   List<int> offsets,
   Map<Type, List<int>> allOffsets,
 ) {
-  final object = Record();
+  final object = Consumption();
   object.amount = reader.readDoubleOrNull(offsets[0]);
   object.createTime = reader.readDateTimeOrNull(offsets[1]);
   object.desc = reader.readStringOrNull(offsets[2]);
@@ -147,7 +147,7 @@ Record _recordDeserialize(
   return object;
 }
 
-P _recordDeserializeProp<P>(
+P _consumptionDeserializeProp<P>(
   IsarReader reader,
   int propertyId,
   int offset,
@@ -169,26 +169,28 @@ P _recordDeserializeProp<P>(
   }
 }
 
-Id _recordGetId(Record object) {
+Id _consumptionGetId(Consumption object) {
   return object.id;
 }
 
-List<IsarLinkBase<dynamic>> _recordGetLinks(Record object) {
+List<IsarLinkBase<dynamic>> _consumptionGetLinks(Consumption object) {
   return [];
 }
 
-void _recordAttach(IsarCollection<dynamic> col, Id id, Record object) {
+void _consumptionAttach(
+    IsarCollection<dynamic> col, Id id, Consumption object) {
   object.id = id;
 }
 
-extension RecordQueryWhereSort on QueryBuilder<Record, Record, QWhere> {
-  QueryBuilder<Record, Record, QAfterWhere> anyId() {
+extension ConsumptionQueryWhereSort
+    on QueryBuilder<Consumption, Consumption, QWhere> {
+  QueryBuilder<Consumption, Consumption, QAfterWhere> anyId() {
     return QueryBuilder.apply(this, (query) {
       return query.addWhereClause(const IdWhereClause.any());
     });
   }
 
-  QueryBuilder<Record, Record, QAfterWhere> anyCreateTime() {
+  QueryBuilder<Consumption, Consumption, QAfterWhere> anyCreateTime() {
     return QueryBuilder.apply(this, (query) {
       return query.addWhereClause(
         const IndexWhereClause.any(indexName: r'createTime'),
@@ -196,7 +198,7 @@ extension RecordQueryWhereSort on QueryBuilder<Record, Record, QWhere> {
     });
   }
 
-  QueryBuilder<Record, Record, QAfterWhere> anyIncome() {
+  QueryBuilder<Consumption, Consumption, QAfterWhere> anyIncome() {
     return QueryBuilder.apply(this, (query) {
       return query.addWhereClause(
         const IndexWhereClause.any(indexName: r'income'),
@@ -204,7 +206,7 @@ extension RecordQueryWhereSort on QueryBuilder<Record, Record, QWhere> {
     });
   }
 
-  QueryBuilder<Record, Record, QAfterWhere> anyAmount() {
+  QueryBuilder<Consumption, Consumption, QAfterWhere> anyAmount() {
     return QueryBuilder.apply(this, (query) {
       return query.addWhereClause(
         const IndexWhereClause.any(indexName: r'amount'),
@@ -213,8 +215,9 @@ extension RecordQueryWhereSort on QueryBuilder<Record, Record, QWhere> {
   }
 }
 
-extension RecordQueryWhere on QueryBuilder<Record, Record, QWhereClause> {
-  QueryBuilder<Record, Record, QAfterWhereClause> idEqualTo(Id id) {
+extension ConsumptionQueryWhere
+    on QueryBuilder<Consumption, Consumption, QWhereClause> {
+  QueryBuilder<Consumption, Consumption, QAfterWhereClause> idEqualTo(Id id) {
     return QueryBuilder.apply(this, (query) {
       return query.addWhereClause(IdWhereClause.between(
         lower: id,
@@ -223,7 +226,8 @@ extension RecordQueryWhere on QueryBuilder<Record, Record, QWhereClause> {
     });
   }
 
-  QueryBuilder<Record, Record, QAfterWhereClause> idNotEqualTo(Id id) {
+  QueryBuilder<Consumption, Consumption, QAfterWhereClause> idNotEqualTo(
+      Id id) {
     return QueryBuilder.apply(this, (query) {
       if (query.whereSort == Sort.asc) {
         return query
@@ -245,7 +249,7 @@ extension RecordQueryWhere on QueryBuilder<Record, Record, QWhereClause> {
     });
   }
 
-  QueryBuilder<Record, Record, QAfterWhereClause> idGreaterThan(Id id,
+  QueryBuilder<Consumption, Consumption, QAfterWhereClause> idGreaterThan(Id id,
       {bool include = false}) {
     return QueryBuilder.apply(this, (query) {
       return query.addWhereClause(
@@ -254,7 +258,7 @@ extension RecordQueryWhere on QueryBuilder<Record, Record, QWhereClause> {
     });
   }
 
-  QueryBuilder<Record, Record, QAfterWhereClause> idLessThan(Id id,
+  QueryBuilder<Consumption, Consumption, QAfterWhereClause> idLessThan(Id id,
       {bool include = false}) {
     return QueryBuilder.apply(this, (query) {
       return query.addWhereClause(
@@ -263,7 +267,7 @@ extension RecordQueryWhere on QueryBuilder<Record, Record, QWhereClause> {
     });
   }
 
-  QueryBuilder<Record, Record, QAfterWhereClause> idBetween(
+  QueryBuilder<Consumption, Consumption, QAfterWhereClause> idBetween(
     Id lowerId,
     Id upperId, {
     bool includeLower = true,
@@ -279,7 +283,7 @@ extension RecordQueryWhere on QueryBuilder<Record, Record, QWhereClause> {
     });
   }
 
-  QueryBuilder<Record, Record, QAfterWhereClause> createTimeIsNull() {
+  QueryBuilder<Consumption, Consumption, QAfterWhereClause> createTimeIsNull() {
     return QueryBuilder.apply(this, (query) {
       return query.addWhereClause(IndexWhereClause.equalTo(
         indexName: r'createTime',
@@ -288,7 +292,8 @@ extension RecordQueryWhere on QueryBuilder<Record, Record, QWhereClause> {
     });
   }
 
-  QueryBuilder<Record, Record, QAfterWhereClause> createTimeIsNotNull() {
+  QueryBuilder<Consumption, Consumption, QAfterWhereClause>
+      createTimeIsNotNull() {
     return QueryBuilder.apply(this, (query) {
       return query.addWhereClause(IndexWhereClause.between(
         indexName: r'createTime',
@@ -299,7 +304,7 @@ extension RecordQueryWhere on QueryBuilder<Record, Record, QWhereClause> {
     });
   }
 
-  QueryBuilder<Record, Record, QAfterWhereClause> createTimeEqualTo(
+  QueryBuilder<Consumption, Consumption, QAfterWhereClause> createTimeEqualTo(
       DateTime? createTime) {
     return QueryBuilder.apply(this, (query) {
       return query.addWhereClause(IndexWhereClause.equalTo(
@@ -309,8 +314,8 @@ extension RecordQueryWhere on QueryBuilder<Record, Record, QWhereClause> {
     });
   }
 
-  QueryBuilder<Record, Record, QAfterWhereClause> createTimeNotEqualTo(
-      DateTime? createTime) {
+  QueryBuilder<Consumption, Consumption, QAfterWhereClause>
+      createTimeNotEqualTo(DateTime? createTime) {
     return QueryBuilder.apply(this, (query) {
       if (query.whereSort == Sort.asc) {
         return query
@@ -344,7 +349,8 @@ extension RecordQueryWhere on QueryBuilder<Record, Record, QWhereClause> {
     });
   }
 
-  QueryBuilder<Record, Record, QAfterWhereClause> createTimeGreaterThan(
+  QueryBuilder<Consumption, Consumption, QAfterWhereClause>
+      createTimeGreaterThan(
     DateTime? createTime, {
     bool include = false,
   }) {
@@ -358,7 +364,7 @@ extension RecordQueryWhere on QueryBuilder<Record, Record, QWhereClause> {
     });
   }
 
-  QueryBuilder<Record, Record, QAfterWhereClause> createTimeLessThan(
+  QueryBuilder<Consumption, Consumption, QAfterWhereClause> createTimeLessThan(
     DateTime? createTime, {
     bool include = false,
   }) {
@@ -372,7 +378,7 @@ extension RecordQueryWhere on QueryBuilder<Record, Record, QWhereClause> {
     });
   }
 
-  QueryBuilder<Record, Record, QAfterWhereClause> createTimeBetween(
+  QueryBuilder<Consumption, Consumption, QAfterWhereClause> createTimeBetween(
     DateTime? lowerCreateTime,
     DateTime? upperCreateTime, {
     bool includeLower = true,
@@ -389,7 +395,7 @@ extension RecordQueryWhere on QueryBuilder<Record, Record, QWhereClause> {
     });
   }
 
-  QueryBuilder<Record, Record, QAfterWhereClause> incomeIsNull() {
+  QueryBuilder<Consumption, Consumption, QAfterWhereClause> incomeIsNull() {
     return QueryBuilder.apply(this, (query) {
       return query.addWhereClause(IndexWhereClause.equalTo(
         indexName: r'income',
@@ -398,7 +404,7 @@ extension RecordQueryWhere on QueryBuilder<Record, Record, QWhereClause> {
     });
   }
 
-  QueryBuilder<Record, Record, QAfterWhereClause> incomeIsNotNull() {
+  QueryBuilder<Consumption, Consumption, QAfterWhereClause> incomeIsNotNull() {
     return QueryBuilder.apply(this, (query) {
       return query.addWhereClause(IndexWhereClause.between(
         indexName: r'income',
@@ -409,7 +415,8 @@ extension RecordQueryWhere on QueryBuilder<Record, Record, QWhereClause> {
     });
   }
 
-  QueryBuilder<Record, Record, QAfterWhereClause> incomeEqualTo(bool? income) {
+  QueryBuilder<Consumption, Consumption, QAfterWhereClause> incomeEqualTo(
+      bool? income) {
     return QueryBuilder.apply(this, (query) {
       return query.addWhereClause(IndexWhereClause.equalTo(
         indexName: r'income',
@@ -418,7 +425,7 @@ extension RecordQueryWhere on QueryBuilder<Record, Record, QWhereClause> {
     });
   }
 
-  QueryBuilder<Record, Record, QAfterWhereClause> incomeNotEqualTo(
+  QueryBuilder<Consumption, Consumption, QAfterWhereClause> incomeNotEqualTo(
       bool? income) {
     return QueryBuilder.apply(this, (query) {
       if (query.whereSort == Sort.asc) {
@@ -453,7 +460,7 @@ extension RecordQueryWhere on QueryBuilder<Record, Record, QWhereClause> {
     });
   }
 
-  QueryBuilder<Record, Record, QAfterWhereClause> amountIsNull() {
+  QueryBuilder<Consumption, Consumption, QAfterWhereClause> amountIsNull() {
     return QueryBuilder.apply(this, (query) {
       return query.addWhereClause(IndexWhereClause.equalTo(
         indexName: r'amount',
@@ -462,7 +469,7 @@ extension RecordQueryWhere on QueryBuilder<Record, Record, QWhereClause> {
     });
   }
 
-  QueryBuilder<Record, Record, QAfterWhereClause> amountIsNotNull() {
+  QueryBuilder<Consumption, Consumption, QAfterWhereClause> amountIsNotNull() {
     return QueryBuilder.apply(this, (query) {
       return query.addWhereClause(IndexWhereClause.between(
         indexName: r'amount',
@@ -473,7 +480,7 @@ extension RecordQueryWhere on QueryBuilder<Record, Record, QWhereClause> {
     });
   }
 
-  QueryBuilder<Record, Record, QAfterWhereClause> amountEqualTo(
+  QueryBuilder<Consumption, Consumption, QAfterWhereClause> amountEqualTo(
       double? amount) {
     return QueryBuilder.apply(this, (query) {
       return query.addWhereClause(IndexWhereClause.equalTo(
@@ -483,7 +490,7 @@ extension RecordQueryWhere on QueryBuilder<Record, Record, QWhereClause> {
     });
   }
 
-  QueryBuilder<Record, Record, QAfterWhereClause> amountNotEqualTo(
+  QueryBuilder<Consumption, Consumption, QAfterWhereClause> amountNotEqualTo(
       double? amount) {
     return QueryBuilder.apply(this, (query) {
       if (query.whereSort == Sort.asc) {
@@ -518,7 +525,7 @@ extension RecordQueryWhere on QueryBuilder<Record, Record, QWhereClause> {
     });
   }
 
-  QueryBuilder<Record, Record, QAfterWhereClause> amountGreaterThan(
+  QueryBuilder<Consumption, Consumption, QAfterWhereClause> amountGreaterThan(
     double? amount, {
     bool include = false,
   }) {
@@ -532,7 +539,7 @@ extension RecordQueryWhere on QueryBuilder<Record, Record, QWhereClause> {
     });
   }
 
-  QueryBuilder<Record, Record, QAfterWhereClause> amountLessThan(
+  QueryBuilder<Consumption, Consumption, QAfterWhereClause> amountLessThan(
     double? amount, {
     bool include = false,
   }) {
@@ -546,7 +553,7 @@ extension RecordQueryWhere on QueryBuilder<Record, Record, QWhereClause> {
     });
   }
 
-  QueryBuilder<Record, Record, QAfterWhereClause> amountBetween(
+  QueryBuilder<Consumption, Consumption, QAfterWhereClause> amountBetween(
     double? lowerAmount,
     double? upperAmount, {
     bool includeLower = true,
@@ -564,8 +571,9 @@ extension RecordQueryWhere on QueryBuilder<Record, Record, QWhereClause> {
   }
 }
 
-extension RecordQueryFilter on QueryBuilder<Record, Record, QFilterCondition> {
-  QueryBuilder<Record, Record, QAfterFilterCondition> amountIsNull() {
+extension ConsumptionQueryFilter
+    on QueryBuilder<Consumption, Consumption, QFilterCondition> {
+  QueryBuilder<Consumption, Consumption, QAfterFilterCondition> amountIsNull() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(const FilterCondition.isNull(
         property: r'amount',
@@ -573,7 +581,8 @@ extension RecordQueryFilter on QueryBuilder<Record, Record, QFilterCondition> {
     });
   }
 
-  QueryBuilder<Record, Record, QAfterFilterCondition> amountIsNotNull() {
+  QueryBuilder<Consumption, Consumption, QAfterFilterCondition>
+      amountIsNotNull() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(const FilterCondition.isNotNull(
         property: r'amount',
@@ -581,7 +590,7 @@ extension RecordQueryFilter on QueryBuilder<Record, Record, QFilterCondition> {
     });
   }
 
-  QueryBuilder<Record, Record, QAfterFilterCondition> amountEqualTo(
+  QueryBuilder<Consumption, Consumption, QAfterFilterCondition> amountEqualTo(
     double? value, {
     double epsilon = Query.epsilon,
   }) {
@@ -594,7 +603,8 @@ extension RecordQueryFilter on QueryBuilder<Record, Record, QFilterCondition> {
     });
   }
 
-  QueryBuilder<Record, Record, QAfterFilterCondition> amountGreaterThan(
+  QueryBuilder<Consumption, Consumption, QAfterFilterCondition>
+      amountGreaterThan(
     double? value, {
     bool include = false,
     double epsilon = Query.epsilon,
@@ -609,7 +619,7 @@ extension RecordQueryFilter on QueryBuilder<Record, Record, QFilterCondition> {
     });
   }
 
-  QueryBuilder<Record, Record, QAfterFilterCondition> amountLessThan(
+  QueryBuilder<Consumption, Consumption, QAfterFilterCondition> amountLessThan(
     double? value, {
     bool include = false,
     double epsilon = Query.epsilon,
@@ -624,7 +634,7 @@ extension RecordQueryFilter on QueryBuilder<Record, Record, QFilterCondition> {
     });
   }
 
-  QueryBuilder<Record, Record, QAfterFilterCondition> amountBetween(
+  QueryBuilder<Consumption, Consumption, QAfterFilterCondition> amountBetween(
     double? lower,
     double? upper, {
     bool includeLower = true,
@@ -643,7 +653,8 @@ extension RecordQueryFilter on QueryBuilder<Record, Record, QFilterCondition> {
     });
   }
 
-  QueryBuilder<Record, Record, QAfterFilterCondition> createTimeIsNull() {
+  QueryBuilder<Consumption, Consumption, QAfterFilterCondition>
+      createTimeIsNull() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(const FilterCondition.isNull(
         property: r'createTime',
@@ -651,7 +662,8 @@ extension RecordQueryFilter on QueryBuilder<Record, Record, QFilterCondition> {
     });
   }
 
-  QueryBuilder<Record, Record, QAfterFilterCondition> createTimeIsNotNull() {
+  QueryBuilder<Consumption, Consumption, QAfterFilterCondition>
+      createTimeIsNotNull() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(const FilterCondition.isNotNull(
         property: r'createTime',
@@ -659,8 +671,8 @@ extension RecordQueryFilter on QueryBuilder<Record, Record, QFilterCondition> {
     });
   }
 
-  QueryBuilder<Record, Record, QAfterFilterCondition> createTimeEqualTo(
-      DateTime? value) {
+  QueryBuilder<Consumption, Consumption, QAfterFilterCondition>
+      createTimeEqualTo(DateTime? value) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
         property: r'createTime',
@@ -669,7 +681,8 @@ extension RecordQueryFilter on QueryBuilder<Record, Record, QFilterCondition> {
     });
   }
 
-  QueryBuilder<Record, Record, QAfterFilterCondition> createTimeGreaterThan(
+  QueryBuilder<Consumption, Consumption, QAfterFilterCondition>
+      createTimeGreaterThan(
     DateTime? value, {
     bool include = false,
   }) {
@@ -682,7 +695,8 @@ extension RecordQueryFilter on QueryBuilder<Record, Record, QFilterCondition> {
     });
   }
 
-  QueryBuilder<Record, Record, QAfterFilterCondition> createTimeLessThan(
+  QueryBuilder<Consumption, Consumption, QAfterFilterCondition>
+      createTimeLessThan(
     DateTime? value, {
     bool include = false,
   }) {
@@ -695,7 +709,8 @@ extension RecordQueryFilter on QueryBuilder<Record, Record, QFilterCondition> {
     });
   }
 
-  QueryBuilder<Record, Record, QAfterFilterCondition> createTimeBetween(
+  QueryBuilder<Consumption, Consumption, QAfterFilterCondition>
+      createTimeBetween(
     DateTime? lower,
     DateTime? upper, {
     bool includeLower = true,
@@ -712,7 +727,7 @@ extension RecordQueryFilter on QueryBuilder<Record, Record, QFilterCondition> {
     });
   }
 
-  QueryBuilder<Record, Record, QAfterFilterCondition> descIsNull() {
+  QueryBuilder<Consumption, Consumption, QAfterFilterCondition> descIsNull() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(const FilterCondition.isNull(
         property: r'desc',
@@ -720,7 +735,8 @@ extension RecordQueryFilter on QueryBuilder<Record, Record, QFilterCondition> {
     });
   }
 
-  QueryBuilder<Record, Record, QAfterFilterCondition> descIsNotNull() {
+  QueryBuilder<Consumption, Consumption, QAfterFilterCondition>
+      descIsNotNull() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(const FilterCondition.isNotNull(
         property: r'desc',
@@ -728,7 +744,7 @@ extension RecordQueryFilter on QueryBuilder<Record, Record, QFilterCondition> {
     });
   }
 
-  QueryBuilder<Record, Record, QAfterFilterCondition> descEqualTo(
+  QueryBuilder<Consumption, Consumption, QAfterFilterCondition> descEqualTo(
     String? value, {
     bool caseSensitive = true,
   }) {
@@ -741,7 +757,7 @@ extension RecordQueryFilter on QueryBuilder<Record, Record, QFilterCondition> {
     });
   }
 
-  QueryBuilder<Record, Record, QAfterFilterCondition> descGreaterThan(
+  QueryBuilder<Consumption, Consumption, QAfterFilterCondition> descGreaterThan(
     String? value, {
     bool include = false,
     bool caseSensitive = true,
@@ -756,7 +772,7 @@ extension RecordQueryFilter on QueryBuilder<Record, Record, QFilterCondition> {
     });
   }
 
-  QueryBuilder<Record, Record, QAfterFilterCondition> descLessThan(
+  QueryBuilder<Consumption, Consumption, QAfterFilterCondition> descLessThan(
     String? value, {
     bool include = false,
     bool caseSensitive = true,
@@ -771,7 +787,7 @@ extension RecordQueryFilter on QueryBuilder<Record, Record, QFilterCondition> {
     });
   }
 
-  QueryBuilder<Record, Record, QAfterFilterCondition> descBetween(
+  QueryBuilder<Consumption, Consumption, QAfterFilterCondition> descBetween(
     String? lower,
     String? upper, {
     bool includeLower = true,
@@ -790,7 +806,7 @@ extension RecordQueryFilter on QueryBuilder<Record, Record, QFilterCondition> {
     });
   }
 
-  QueryBuilder<Record, Record, QAfterFilterCondition> descStartsWith(
+  QueryBuilder<Consumption, Consumption, QAfterFilterCondition> descStartsWith(
     String value, {
     bool caseSensitive = true,
   }) {
@@ -803,7 +819,7 @@ extension RecordQueryFilter on QueryBuilder<Record, Record, QFilterCondition> {
     });
   }
 
-  QueryBuilder<Record, Record, QAfterFilterCondition> descEndsWith(
+  QueryBuilder<Consumption, Consumption, QAfterFilterCondition> descEndsWith(
     String value, {
     bool caseSensitive = true,
   }) {
@@ -816,7 +832,8 @@ extension RecordQueryFilter on QueryBuilder<Record, Record, QFilterCondition> {
     });
   }
 
-  QueryBuilder<Record, Record, QAfterFilterCondition> descContains(String value,
+  QueryBuilder<Consumption, Consumption, QAfterFilterCondition> descContains(
+      String value,
       {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.contains(
@@ -827,7 +844,7 @@ extension RecordQueryFilter on QueryBuilder<Record, Record, QFilterCondition> {
     });
   }
 
-  QueryBuilder<Record, Record, QAfterFilterCondition> descMatches(
+  QueryBuilder<Consumption, Consumption, QAfterFilterCondition> descMatches(
       String pattern,
       {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
@@ -839,7 +856,7 @@ extension RecordQueryFilter on QueryBuilder<Record, Record, QFilterCondition> {
     });
   }
 
-  QueryBuilder<Record, Record, QAfterFilterCondition> descIsEmpty() {
+  QueryBuilder<Consumption, Consumption, QAfterFilterCondition> descIsEmpty() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
         property: r'desc',
@@ -848,7 +865,8 @@ extension RecordQueryFilter on QueryBuilder<Record, Record, QFilterCondition> {
     });
   }
 
-  QueryBuilder<Record, Record, QAfterFilterCondition> descIsNotEmpty() {
+  QueryBuilder<Consumption, Consumption, QAfterFilterCondition>
+      descIsNotEmpty() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.greaterThan(
         property: r'desc',
@@ -857,7 +875,8 @@ extension RecordQueryFilter on QueryBuilder<Record, Record, QFilterCondition> {
     });
   }
 
-  QueryBuilder<Record, Record, QAfterFilterCondition> idEqualTo(Id value) {
+  QueryBuilder<Consumption, Consumption, QAfterFilterCondition> idEqualTo(
+      Id value) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
         property: r'id',
@@ -866,7 +885,7 @@ extension RecordQueryFilter on QueryBuilder<Record, Record, QFilterCondition> {
     });
   }
 
-  QueryBuilder<Record, Record, QAfterFilterCondition> idGreaterThan(
+  QueryBuilder<Consumption, Consumption, QAfterFilterCondition> idGreaterThan(
     Id value, {
     bool include = false,
   }) {
@@ -879,7 +898,7 @@ extension RecordQueryFilter on QueryBuilder<Record, Record, QFilterCondition> {
     });
   }
 
-  QueryBuilder<Record, Record, QAfterFilterCondition> idLessThan(
+  QueryBuilder<Consumption, Consumption, QAfterFilterCondition> idLessThan(
     Id value, {
     bool include = false,
   }) {
@@ -892,7 +911,7 @@ extension RecordQueryFilter on QueryBuilder<Record, Record, QFilterCondition> {
     });
   }
 
-  QueryBuilder<Record, Record, QAfterFilterCondition> idBetween(
+  QueryBuilder<Consumption, Consumption, QAfterFilterCondition> idBetween(
     Id lower,
     Id upper, {
     bool includeLower = true,
@@ -909,7 +928,7 @@ extension RecordQueryFilter on QueryBuilder<Record, Record, QFilterCondition> {
     });
   }
 
-  QueryBuilder<Record, Record, QAfterFilterCondition> incomeIsNull() {
+  QueryBuilder<Consumption, Consumption, QAfterFilterCondition> incomeIsNull() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(const FilterCondition.isNull(
         property: r'income',
@@ -917,7 +936,8 @@ extension RecordQueryFilter on QueryBuilder<Record, Record, QFilterCondition> {
     });
   }
 
-  QueryBuilder<Record, Record, QAfterFilterCondition> incomeIsNotNull() {
+  QueryBuilder<Consumption, Consumption, QAfterFilterCondition>
+      incomeIsNotNull() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(const FilterCondition.isNotNull(
         property: r'income',
@@ -925,7 +945,7 @@ extension RecordQueryFilter on QueryBuilder<Record, Record, QFilterCondition> {
     });
   }
 
-  QueryBuilder<Record, Record, QAfterFilterCondition> incomeEqualTo(
+  QueryBuilder<Consumption, Consumption, QAfterFilterCondition> incomeEqualTo(
       bool? value) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
@@ -935,7 +955,7 @@ extension RecordQueryFilter on QueryBuilder<Record, Record, QFilterCondition> {
     });
   }
 
-  QueryBuilder<Record, Record, QAfterFilterCondition> tagsIsNull() {
+  QueryBuilder<Consumption, Consumption, QAfterFilterCondition> tagsIsNull() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(const FilterCondition.isNull(
         property: r'tags',
@@ -943,7 +963,8 @@ extension RecordQueryFilter on QueryBuilder<Record, Record, QFilterCondition> {
     });
   }
 
-  QueryBuilder<Record, Record, QAfterFilterCondition> tagsIsNotNull() {
+  QueryBuilder<Consumption, Consumption, QAfterFilterCondition>
+      tagsIsNotNull() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(const FilterCondition.isNotNull(
         property: r'tags',
@@ -951,8 +972,8 @@ extension RecordQueryFilter on QueryBuilder<Record, Record, QFilterCondition> {
     });
   }
 
-  QueryBuilder<Record, Record, QAfterFilterCondition> tagsElementEqualTo(
-      int value) {
+  QueryBuilder<Consumption, Consumption, QAfterFilterCondition>
+      tagsElementEqualTo(int value) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
         property: r'tags',
@@ -961,7 +982,8 @@ extension RecordQueryFilter on QueryBuilder<Record, Record, QFilterCondition> {
     });
   }
 
-  QueryBuilder<Record, Record, QAfterFilterCondition> tagsElementGreaterThan(
+  QueryBuilder<Consumption, Consumption, QAfterFilterCondition>
+      tagsElementGreaterThan(
     int value, {
     bool include = false,
   }) {
@@ -974,7 +996,8 @@ extension RecordQueryFilter on QueryBuilder<Record, Record, QFilterCondition> {
     });
   }
 
-  QueryBuilder<Record, Record, QAfterFilterCondition> tagsElementLessThan(
+  QueryBuilder<Consumption, Consumption, QAfterFilterCondition>
+      tagsElementLessThan(
     int value, {
     bool include = false,
   }) {
@@ -987,7 +1010,8 @@ extension RecordQueryFilter on QueryBuilder<Record, Record, QFilterCondition> {
     });
   }
 
-  QueryBuilder<Record, Record, QAfterFilterCondition> tagsElementBetween(
+  QueryBuilder<Consumption, Consumption, QAfterFilterCondition>
+      tagsElementBetween(
     int lower,
     int upper, {
     bool includeLower = true,
@@ -1004,8 +1028,8 @@ extension RecordQueryFilter on QueryBuilder<Record, Record, QFilterCondition> {
     });
   }
 
-  QueryBuilder<Record, Record, QAfterFilterCondition> tagsLengthEqualTo(
-      int length) {
+  QueryBuilder<Consumption, Consumption, QAfterFilterCondition>
+      tagsLengthEqualTo(int length) {
     return QueryBuilder.apply(this, (query) {
       return query.listLength(
         r'tags',
@@ -1017,7 +1041,7 @@ extension RecordQueryFilter on QueryBuilder<Record, Record, QFilterCondition> {
     });
   }
 
-  QueryBuilder<Record, Record, QAfterFilterCondition> tagsIsEmpty() {
+  QueryBuilder<Consumption, Consumption, QAfterFilterCondition> tagsIsEmpty() {
     return QueryBuilder.apply(this, (query) {
       return query.listLength(
         r'tags',
@@ -1029,7 +1053,8 @@ extension RecordQueryFilter on QueryBuilder<Record, Record, QFilterCondition> {
     });
   }
 
-  QueryBuilder<Record, Record, QAfterFilterCondition> tagsIsNotEmpty() {
+  QueryBuilder<Consumption, Consumption, QAfterFilterCondition>
+      tagsIsNotEmpty() {
     return QueryBuilder.apply(this, (query) {
       return query.listLength(
         r'tags',
@@ -1041,7 +1066,8 @@ extension RecordQueryFilter on QueryBuilder<Record, Record, QFilterCondition> {
     });
   }
 
-  QueryBuilder<Record, Record, QAfterFilterCondition> tagsLengthLessThan(
+  QueryBuilder<Consumption, Consumption, QAfterFilterCondition>
+      tagsLengthLessThan(
     int length, {
     bool include = false,
   }) {
@@ -1056,7 +1082,8 @@ extension RecordQueryFilter on QueryBuilder<Record, Record, QFilterCondition> {
     });
   }
 
-  QueryBuilder<Record, Record, QAfterFilterCondition> tagsLengthGreaterThan(
+  QueryBuilder<Consumption, Consumption, QAfterFilterCondition>
+      tagsLengthGreaterThan(
     int length, {
     bool include = false,
   }) {
@@ -1071,7 +1098,8 @@ extension RecordQueryFilter on QueryBuilder<Record, Record, QFilterCondition> {
     });
   }
 
-  QueryBuilder<Record, Record, QAfterFilterCondition> tagsLengthBetween(
+  QueryBuilder<Consumption, Consumption, QAfterFilterCondition>
+      tagsLengthBetween(
     int lower,
     int upper, {
     bool includeLower = true,
@@ -1089,187 +1117,193 @@ extension RecordQueryFilter on QueryBuilder<Record, Record, QFilterCondition> {
   }
 }
 
-extension RecordQueryObject on QueryBuilder<Record, Record, QFilterCondition> {}
+extension ConsumptionQueryObject
+    on QueryBuilder<Consumption, Consumption, QFilterCondition> {}
 
-extension RecordQueryLinks on QueryBuilder<Record, Record, QFilterCondition> {}
+extension ConsumptionQueryLinks
+    on QueryBuilder<Consumption, Consumption, QFilterCondition> {}
 
-extension RecordQuerySortBy on QueryBuilder<Record, Record, QSortBy> {
-  QueryBuilder<Record, Record, QAfterSortBy> sortByAmount() {
+extension ConsumptionQuerySortBy
+    on QueryBuilder<Consumption, Consumption, QSortBy> {
+  QueryBuilder<Consumption, Consumption, QAfterSortBy> sortByAmount() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'amount', Sort.asc);
     });
   }
 
-  QueryBuilder<Record, Record, QAfterSortBy> sortByAmountDesc() {
+  QueryBuilder<Consumption, Consumption, QAfterSortBy> sortByAmountDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'amount', Sort.desc);
     });
   }
 
-  QueryBuilder<Record, Record, QAfterSortBy> sortByCreateTime() {
+  QueryBuilder<Consumption, Consumption, QAfterSortBy> sortByCreateTime() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'createTime', Sort.asc);
     });
   }
 
-  QueryBuilder<Record, Record, QAfterSortBy> sortByCreateTimeDesc() {
+  QueryBuilder<Consumption, Consumption, QAfterSortBy> sortByCreateTimeDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'createTime', Sort.desc);
     });
   }
 
-  QueryBuilder<Record, Record, QAfterSortBy> sortByDesc() {
+  QueryBuilder<Consumption, Consumption, QAfterSortBy> sortByDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'desc', Sort.asc);
     });
   }
 
-  QueryBuilder<Record, Record, QAfterSortBy> sortByDescDesc() {
+  QueryBuilder<Consumption, Consumption, QAfterSortBy> sortByDescDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'desc', Sort.desc);
     });
   }
 
-  QueryBuilder<Record, Record, QAfterSortBy> sortByIncome() {
+  QueryBuilder<Consumption, Consumption, QAfterSortBy> sortByIncome() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'income', Sort.asc);
     });
   }
 
-  QueryBuilder<Record, Record, QAfterSortBy> sortByIncomeDesc() {
+  QueryBuilder<Consumption, Consumption, QAfterSortBy> sortByIncomeDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'income', Sort.desc);
     });
   }
 }
 
-extension RecordQuerySortThenBy on QueryBuilder<Record, Record, QSortThenBy> {
-  QueryBuilder<Record, Record, QAfterSortBy> thenByAmount() {
+extension ConsumptionQuerySortThenBy
+    on QueryBuilder<Consumption, Consumption, QSortThenBy> {
+  QueryBuilder<Consumption, Consumption, QAfterSortBy> thenByAmount() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'amount', Sort.asc);
     });
   }
 
-  QueryBuilder<Record, Record, QAfterSortBy> thenByAmountDesc() {
+  QueryBuilder<Consumption, Consumption, QAfterSortBy> thenByAmountDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'amount', Sort.desc);
     });
   }
 
-  QueryBuilder<Record, Record, QAfterSortBy> thenByCreateTime() {
+  QueryBuilder<Consumption, Consumption, QAfterSortBy> thenByCreateTime() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'createTime', Sort.asc);
     });
   }
 
-  QueryBuilder<Record, Record, QAfterSortBy> thenByCreateTimeDesc() {
+  QueryBuilder<Consumption, Consumption, QAfterSortBy> thenByCreateTimeDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'createTime', Sort.desc);
     });
   }
 
-  QueryBuilder<Record, Record, QAfterSortBy> thenByDesc() {
+  QueryBuilder<Consumption, Consumption, QAfterSortBy> thenByDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'desc', Sort.asc);
     });
   }
 
-  QueryBuilder<Record, Record, QAfterSortBy> thenByDescDesc() {
+  QueryBuilder<Consumption, Consumption, QAfterSortBy> thenByDescDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'desc', Sort.desc);
     });
   }
 
-  QueryBuilder<Record, Record, QAfterSortBy> thenById() {
+  QueryBuilder<Consumption, Consumption, QAfterSortBy> thenById() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'id', Sort.asc);
     });
   }
 
-  QueryBuilder<Record, Record, QAfterSortBy> thenByIdDesc() {
+  QueryBuilder<Consumption, Consumption, QAfterSortBy> thenByIdDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'id', Sort.desc);
     });
   }
 
-  QueryBuilder<Record, Record, QAfterSortBy> thenByIncome() {
+  QueryBuilder<Consumption, Consumption, QAfterSortBy> thenByIncome() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'income', Sort.asc);
     });
   }
 
-  QueryBuilder<Record, Record, QAfterSortBy> thenByIncomeDesc() {
+  QueryBuilder<Consumption, Consumption, QAfterSortBy> thenByIncomeDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'income', Sort.desc);
     });
   }
 }
 
-extension RecordQueryWhereDistinct on QueryBuilder<Record, Record, QDistinct> {
-  QueryBuilder<Record, Record, QDistinct> distinctByAmount() {
+extension ConsumptionQueryWhereDistinct
+    on QueryBuilder<Consumption, Consumption, QDistinct> {
+  QueryBuilder<Consumption, Consumption, QDistinct> distinctByAmount() {
     return QueryBuilder.apply(this, (query) {
       return query.addDistinctBy(r'amount');
     });
   }
 
-  QueryBuilder<Record, Record, QDistinct> distinctByCreateTime() {
+  QueryBuilder<Consumption, Consumption, QDistinct> distinctByCreateTime() {
     return QueryBuilder.apply(this, (query) {
       return query.addDistinctBy(r'createTime');
     });
   }
 
-  QueryBuilder<Record, Record, QDistinct> distinctByDesc(
+  QueryBuilder<Consumption, Consumption, QDistinct> distinctByDesc(
       {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addDistinctBy(r'desc', caseSensitive: caseSensitive);
     });
   }
 
-  QueryBuilder<Record, Record, QDistinct> distinctByIncome() {
+  QueryBuilder<Consumption, Consumption, QDistinct> distinctByIncome() {
     return QueryBuilder.apply(this, (query) {
       return query.addDistinctBy(r'income');
     });
   }
 
-  QueryBuilder<Record, Record, QDistinct> distinctByTags() {
+  QueryBuilder<Consumption, Consumption, QDistinct> distinctByTags() {
     return QueryBuilder.apply(this, (query) {
       return query.addDistinctBy(r'tags');
     });
   }
 }
 
-extension RecordQueryProperty on QueryBuilder<Record, Record, QQueryProperty> {
-  QueryBuilder<Record, int, QQueryOperations> idProperty() {
+extension ConsumptionQueryProperty
+    on QueryBuilder<Consumption, Consumption, QQueryProperty> {
+  QueryBuilder<Consumption, int, QQueryOperations> idProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'id');
     });
   }
 
-  QueryBuilder<Record, double?, QQueryOperations> amountProperty() {
+  QueryBuilder<Consumption, double?, QQueryOperations> amountProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'amount');
     });
   }
 
-  QueryBuilder<Record, DateTime?, QQueryOperations> createTimeProperty() {
+  QueryBuilder<Consumption, DateTime?, QQueryOperations> createTimeProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'createTime');
     });
   }
 
-  QueryBuilder<Record, String?, QQueryOperations> descProperty() {
+  QueryBuilder<Consumption, String?, QQueryOperations> descProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'desc');
     });
   }
 
-  QueryBuilder<Record, bool?, QQueryOperations> incomeProperty() {
+  QueryBuilder<Consumption, bool?, QQueryOperations> incomeProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'income');
     });
   }
 
-  QueryBuilder<Record, List<int>?, QQueryOperations> tagsProperty() {
+  QueryBuilder<Consumption, List<int>?, QQueryOperations> tagsProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'tags');
     });
