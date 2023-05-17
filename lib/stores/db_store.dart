@@ -8,13 +8,21 @@ import 'package:wuwu/utils/safe_print.dart';
 
 abstract class DBStoreImpl {
   // region 标签
+  /// 增加标签
+  static Future addTag(Tag tag) async {
+    if (_handle == null) return Result.err('数据库初始化失败');
+
+    await _handle!.writeTxn(() async {
+      tag.createTime = DateTime.now();
+      await _handle!.tags.put(tag);
+    });
+  }
+
   /// 获取所有标签
   static Future<Result<List<Tag>, String>> getAllTags() async {
     if (_handle == null) return Result.err('数据库初始化失败');
 
     var r = await _handle!.tags.where().sortByCreateTime().findAll();
-
-    SafePrint.info(await _handle!.tags.where().sortByCreateTime().findAll());
 
     return Result.ok(r);
   }
@@ -23,6 +31,11 @@ abstract class DBStoreImpl {
 
   // region lifecycle
   static Future<void> init() async {
+    if (_handle?.isOpen == true) {
+      SafePrint.warn('[DBStoreImpl] re-init (skip)');
+      return;
+    }
+
     final docDir = await getApplicationDocumentsDirectory();
     final appDir = Directory('${docDir.path}${Platform.pathSeparator}wuwu');
 
