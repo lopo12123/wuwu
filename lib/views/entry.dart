@@ -15,7 +15,11 @@ class EntryView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: ToolBar(
-        leading: IconImage.use(IconImage.draw, size: 32, color: Palette.b10),
+        leading: IconButton(
+          onPressed: () => Get.toNamed(MyRoutes.tag_manage),
+          icon: const Icon(Icons.style_outlined),
+        ),
+        // IconImage.use(IconImage.draw, size: 32, color: Palette.b10),
       ),
       body: Center(
         child: Column(

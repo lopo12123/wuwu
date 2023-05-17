@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:isar/isar.dart';
 
 part 'record.g.dart';
@@ -23,7 +25,6 @@ class Record {
 
   /// 标签
   List<int>? tags;
-
 
   Map<String, dynamic> toJson() {
     return {
