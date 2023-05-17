@@ -1,7 +1,7 @@
 import 'package:bot_toast/bot_toast.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:wuwu/components/styled_text.dart';
+import 'package:wuwu/components/common/styled_text.dart';
 import 'package:wuwu/platform_spec/platform_spec.dart';
 import 'package:wuwu/platform_spec/windows_spec.dart';
 import 'package:wuwu/routes/index.dart';
@@ -31,7 +31,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         appBarTheme: const AppBarTheme(backgroundColor: Palette.b90),
         scaffoldBackgroundColor: Palette.b10,
-        fontFamily: StyledTextFamily.ZhuoKai.name,
+        fontFamily: StyledTextFamily.ShouShu,
       ),
       initialRoute: MyRoutes.entry,
       unknownRoute: invalidPage,

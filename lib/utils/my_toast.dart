@@ -1,6 +1,6 @@
 import 'package:bot_toast/bot_toast.dart';
 import 'package:flutter/material.dart';
-import 'package:wuwu/components/styled_text.dart';
+import 'package:wuwu/components/common/styled_text.dart';
 import 'package:wuwu/styles/palette.dart';
 
 abstract class MyToast {
@@ -17,7 +17,7 @@ abstract class MyToast {
             child: ElevatedButton.icon(
               onPressed: null,
               icon: icon,
-              label: StyledText.ZhuoKai(
+              label: StyledText.ShouShu(
                 text,
                 fontSize: 12,
                 color: Palette.b10,

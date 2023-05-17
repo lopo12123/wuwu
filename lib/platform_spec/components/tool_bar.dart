@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:window_manager/window_manager.dart';
-import 'package:wuwu/components/styled_text.dart';
+import 'package:wuwu/components/common/styled_text.dart';
 import 'package:wuwu/platform_spec/platform_spec.dart';
 import 'package:wuwu/styles/palette.dart';
 
@@ -30,7 +30,7 @@ class ToolBar extends StatelessWidget implements PreferredSizeWidget {
     super.key,
     this.automaticallyImplyLeading = true,
     this.leading,
-    this.title = const StyledText.ZhuoKai('呜呜'),
+    this.title = const StyledText.XiaoBai('呜呜'),
     this.noTitle = false,
     this.actions,
   });

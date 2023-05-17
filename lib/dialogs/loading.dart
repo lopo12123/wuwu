@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
-import 'package:wuwu/components/styled_text.dart';
+import 'package:wuwu/components/common/styled_text.dart';
 import 'package:wuwu/styles/palette.dart';
 
 /// 加载状态占位图像

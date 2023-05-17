@@ -122,12 +122,12 @@ flutter:
         - asset: fonts/JetBrainsMono/SemiBold.ttf
         - asset: fonts/JetBrainsMono/Bold.ttf
         - asset: fonts/JetBrainsMono/ExtraBold.ttf
-    - family: ZhuoKai
+    - family: ShouShu
       fonts:
-        - asset: fonts/ZhuoKai/Regular.ttf
-    - family: LED
+        - asset: fonts/ShouShu/ShouShu.ttf
+    - family: XiaoBai
       fonts:
-        - asset: fonts/LED/UNIDREAMLED.ttf
+        - asset: fonts/XiaoBai/XiaoBai.ttf
 
 # 配置应用图标
 # $ flutter pub run flutter_launcher_icons

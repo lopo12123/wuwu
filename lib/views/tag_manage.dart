@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:wuwu/components/styled_text.dart';
+import 'package:wuwu/components/common/search_box_debounce.dart';
+import 'package:wuwu/components/common/styled_text.dart';
 import 'package:wuwu/platform_spec/components/tool_bar.dart';
 import 'package:wuwu/stores/collections/tag.dart';
 import 'package:wuwu/stores/global_store.dart';
 import 'package:wuwu/styles/palette.dart';
+import 'package:wuwu/utils/safe_print.dart';
 
 class _TagItem extends StatelessWidget {
   final Tag tag;
@@ -17,16 +19,21 @@ class _TagItem extends StatelessWidget {
       height: 32,
       margin: const EdgeInsets.symmetric(vertical: 8),
       padding: const EdgeInsets.symmetric(horizontal: 8),
-      color: Palette.b20,
+      decoration: BoxDecoration(
+        color: Palette.b20,
+        borderRadius: BorderRadius.circular(4),
+      ),
       child: Row(
         children: [
           CircleAvatar(
-            radius: 12,
+            radius: 8,
             backgroundColor: Color(tag.colorHex ?? Palette.blue.value),
           ),
           Expanded(
-            child: StyledText.ZhuoKai(tag.tagName ?? '???')
-                .paddingSymmetric(horizontal: 8),
+            child: StyledText.ShouShu(
+              tag.tagName ?? '???',
+              fontSize: 14,
+            ).paddingSymmetric(horizontal: 8),
           ),
           StyledText.JBMono(
             tag.createTime?.toString().substring(0, 16) ?? '--',
@@ -62,30 +69,29 @@ class TagManageView extends GetView<_TagManageController> {
     Get.put(_TagManageController());
 
     return Scaffold(
-      appBar: const ToolBar(
-        title: StyledText.ZhuoKai('标签管理'),
-      ),
-      body: RefreshIndicator(
-        onRefresh: controller.syncTags,
-        child: Obx(
-          () => ListView(
-            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-            children: [
-              ...controller.tags.map((tag) {
-                return _TagItem(tag: tag);
-              }),
-              ElevatedButton(
-                onPressed: () {
-                  GlobalStoreImpl.store.addTag(Tag()
-                    ..tagName = 'ElevatedButton'
-                    ..colorHex = Palette.yellow.value);
-                },
-                child: StyledText.ZhuoKai('添加标签'),
-              ),
-            ],
-          ),
+        appBar: const ToolBar(
+          title: StyledText.ShouShu('标签管理'),
         ),
-      ),
-    );
+        body: Column(
+          children: [
+            SearchBoxDebounce(onConfirmed: (str) {
+              SafePrint.info(str);
+            }),
+            Expanded(
+              child: RefreshIndicator(
+                onRefresh: controller.syncTags,
+                child: Obx(
+                  () => ListView(
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                    children: controller.tags.map((tag) {
+                      return _TagItem(tag: tag);
+                    }).toList(),
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ));
   }
 }
