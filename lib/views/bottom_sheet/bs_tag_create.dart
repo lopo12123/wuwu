@@ -5,9 +5,21 @@ import 'package:wuwu/components/common/styled_text.dart';
 import 'package:wuwu/styles/button.dart';
 import 'package:wuwu/styles/palette.dart';
 
+/// 标签的可选颜色
+const List<Color> tagColorList = [
+  Palette.blue,
+  Palette.red,
+  Palette.yellow,
+  Palette.green,
+  Palette.purple,
+];
+
 /// 新建标签
 class BSTagCreate extends StatelessWidget {
-  const BSTagCreate({super.key});
+  final RxString tagName = ''.obs;
+  final RxInt tagColorValue = Palette.blue.value.obs;
+
+  BSTagCreate({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +27,7 @@ class BSTagCreate extends StatelessWidget {
       width: Get.width,
       // height: Get.height / 2,
       decoration: const BoxDecoration(
-        color: Palette.b30,
+        color: Palette.b20,
         borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
       ),
       child: SafeArea(
@@ -23,8 +35,26 @@ class BSTagCreate extends StatelessWidget {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            StyledText.JBMono('data'),
-            InputBox(hintText: '请输入标签名'),
+            const StyledText.XiaoBai('新建标签', fontSize: 22)
+                .paddingSymmetric(vertical: 8),
+            const Divider(height: 1, thickness: 1, color: Palette.b40),
+            InputBox(
+              hintText: '请输入标签名',
+              onChanged: (s) => tagName(s),
+            ).paddingAll(16),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                const StyledText.XiaoBai('选择标签颜色:', fontSize: 18),
+                ...tagColorList.map(
+                  // todo 点击选择
+                  (tagColor) => CircleAvatar(
+                    radius: tagColor.value == tagColorValue.value ? 7 : 5,
+                    backgroundColor: tagColor,
+                  ),
+                ),
+              ],
+            ).paddingSymmetric(horizontal: 16),
             Padding(
               padding: const EdgeInsets.all(16),
               child: Row(
