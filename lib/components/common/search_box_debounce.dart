@@ -72,7 +72,7 @@ class SearchBoxDebounce extends GetView<_SearchBoxDebounceController> {
                 hintText: hintText,
                 hintStyle: const TextStyle(color: Palette.b50, fontSize: 14),
               ),
-              style: const TextStyle(color: Palette.b90, fontSize: 14),
+              style: const TextStyle(color: Palette.b90, fontSize: 16),
               onTapOutside: (pEv) {
                 // 点击外部自动失去焦点
                 FocusManager.instance.primaryFocus?.unfocus();
