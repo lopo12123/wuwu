@@ -4,13 +4,17 @@ import 'package:isar/isar.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:wuwu/misc/result.dart';
 import 'package:wuwu/stores/collections/tag.dart';
+import 'package:wuwu/utils/my_toast.dart';
 import 'package:wuwu/utils/safe_print.dart';
 
 abstract class DBStoreImpl {
   // region 标签
   /// 增加标签
-  static Future addTag(Tag tag) async {
-    if (_handle == null) return Result.err('数据库初始化失败');
+  static Future<void> addTag(Tag tag) async {
+    if (_handle == null) {
+      MyToast.error('数据库初始化失败');
+      return;
+    }
 
     await _handle!.writeTxn(() async {
       tag.createTime = DateTime.now();
@@ -18,13 +22,26 @@ abstract class DBStoreImpl {
     });
   }
 
+  /// 删除标签
+  static Future deleteTag(Id tagId) async {
+    if (_handle == null) {
+      MyToast.error('数据库初始化失败');
+      return;
+    }
+
+    await _handle!.writeTxn(() async {
+      await _handle!.tags.delete(tagId);
+    });
+  }
+
   /// 获取所有标签
-  static Future<Result<List<Tag>, String>> getAllTags() async {
-    if (_handle == null) return Result.err('数据库初始化失败');
+  static Future<List<Tag>> getAllTags() async {
+    if (_handle == null) {
+      MyToast.error('数据库初始化失败');
+      return [];
+    }
 
-    var r = await _handle!.tags.where().sortByCreateTime().findAll();
-
-    return Result.ok(r);
+    return await _handle!.tags.where().sortByCreateTime().findAll();
   }
 
   // endregion

@@ -33,6 +33,7 @@ dependencies:
   flip_board:
   flutter:
     sdk: flutter
+  flutter_slidable:
   gesture_password_widget:
   get:
   isar:

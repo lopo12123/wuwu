@@ -15,7 +15,10 @@ class GlobalStoreImpl extends GetxService {
     tags.add(tag);
   }
 
-  Future<void> deleteTag(Tag tag) async {}
+  Future<void> deleteTag(int tagId) async {
+    await DBStoreImpl.deleteTag(tagId);
+    tags.removeWhere((tag) => tag.id == tagId);
+  }
 
   final RxList<Consumption> records = <Consumption>[].obs;
 
@@ -23,14 +26,8 @@ class GlobalStoreImpl extends GetxService {
     await DBStoreImpl.init();
 
     if (tag) {
-      var t = await DBStoreImpl.getAllTags();
-
-      if (t.ok) {
-        tags(t.value);
-        SafePrint.info('[GlobalStoreImpl] init(tag) done.');
-      } else {
-        SafePrint.warn('[GlobalStoreImpl] init(tag) failed.');
-      }
+      tags(await DBStoreImpl.getAllTags());
+      SafePrint.info('[GlobalStoreImpl] init(tag) done.');
     }
 
     if (toast) MyToast.success('刷新成功');
