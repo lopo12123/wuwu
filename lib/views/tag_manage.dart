@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:wuwu/components/common/search_box_debounce.dart';
 import 'package:wuwu/components/common/styled_text.dart';
+import 'package:wuwu/components/empty_list.dart';
 import 'package:wuwu/components/slidable_widget.dart';
 import 'package:wuwu/platform_spec/components/tool_bar.dart';
 import 'package:wuwu/stores/collections/tag.dart';
@@ -53,13 +54,16 @@ class _TagItem extends StatelessWidget {
 }
 
 class _TagManageController extends GetxController {
+  /// 展示的标签列表
   RxList<Tag> tagList = <Tag>[].obs;
 
+  /// 从数据库获取最新的标签列表
   Future<void> syncTags([bool toast = true]) async {
     await GlobalStoreImpl.store.init(toast: toast, tag: true);
     tagList(GlobalStoreImpl.store.tags);
   }
 
+  /// 搜索标签
   Future<void> searchTags(String part) async {
     if (part.isEmpty) {
       syncTags(false);
@@ -69,6 +73,12 @@ class _TagManageController extends GetxController {
           .toList();
       tagList(filtered);
     }
+  }
+
+  /// 打开新建标签的交互
+  void requestTagCreate() {
+    // todo
+    SafePrint.info('requestTagCreate');
   }
 
   @override
@@ -94,15 +104,14 @@ class TagManageView extends GetView<_TagManageController> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               SearchBoxDebounce(
-                hintText: '输入标签名开始查找',
+                hintText: '输入标签名以查找',
                 onConfirmed: controller.searchTags,
               ),
-              // todo
               IconButton(
-                icon: Icon(Icons.add),
-                onPressed: () {
-                  SafePrint.info('创建标签');
-                },
+                iconSize: 32,
+                padding: const EdgeInsets.only(left: 16),
+                onPressed: controller.requestTagCreate,
+                icon: const Icon(Icons.bookmark_add, color: Palette.b70),
               ),
             ],
           ),
@@ -110,24 +119,26 @@ class TagManageView extends GetView<_TagManageController> {
             child: RefreshIndicator(
               onRefresh: controller.syncTags,
               child: Obx(
-                () => ListView(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 16,
-                    vertical: 8,
-                  ),
-                  children: controller.tagList.map((tag) {
-                    return slidableTagItem(
-                      onEdit: () {
-                        MyToast.warn('暂不支持');
-                      },
-                      onDelete: () async {
-                        await GlobalStoreImpl.store.deleteTag(tag.id);
-                        MyToast.success('标签已删除');
-                      },
-                      child: _TagItem(tag: tag),
-                    );
-                  }).toList(),
-                ),
+                () => controller.tagList.isEmpty
+                    ? emptyListPlaceholder(color: Palette.b50)
+                    : ListView(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 16,
+                          vertical: 8,
+                        ),
+                        children: controller.tagList.map((tag) {
+                          return slidableTagItem(
+                            onEdit: () {
+                              MyToast.warn('暂不支持');
+                            },
+                            onDelete: () async {
+                              await GlobalStoreImpl.store.deleteTag(tag.id);
+                              MyToast.success('标签已删除');
+                            },
+                            child: _TagItem(tag: tag),
+                          );
+                        }).toList(),
+                      ),
               ),
             ),
           ),

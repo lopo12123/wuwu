@@ -8,6 +8,7 @@ import 'package:wuwu/platform_spec/components/tool_bar.dart';
 import 'package:wuwu/routes/index.dart';
 import 'package:wuwu/styles/palette.dart';
 import 'package:wuwu/utils/my_toast.dart';
+import 'package:wuwu/views/bottom_sheet/bs_tag_create.dart';
 
 class EntryView extends StatelessWidget {
   const EntryView({super.key});
@@ -32,14 +33,15 @@ class EntryView extends StatelessWidget {
               onPressed: () => MyToast.success('ok可以'),
               child: StyledText.JBMono('toast'),
             ),
-            ElevatedButton(
-              onPressed: () => Get.toNamed(MyRoutes.db_viewer),
-              child: StyledText.JBMono('to db_viewer'),
-            ),
-            ElevatedButton(
-              onPressed: () => Get.toNamed(MyRoutes.path_lock),
-              child: StyledText.JBMono('to path_lock'),
-            ),
+            BSTagCreate(),
+            // ElevatedButton(
+            //   onPressed: () => Get.toNamed(MyRoutes.db_viewer),
+            //   child: StyledText.JBMono('to db_viewer'),
+            // ),
+            // ElevatedButton(
+            //   onPressed: () => Get.toNamed(MyRoutes.path_lock),
+            //   child: StyledText.JBMono('to path_lock'),
+            // ),
           ],
         ),
       ),
