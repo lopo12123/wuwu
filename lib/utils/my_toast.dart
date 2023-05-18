@@ -19,7 +19,7 @@ abstract class MyToast {
               icon: icon,
               label: StyledText.ShouShu(
                 text,
-                fontSize: 12,
+                fontSize: 16,
                 color: Palette.b10,
                 overflow: TextOverflow.ellipsis,
               ),
