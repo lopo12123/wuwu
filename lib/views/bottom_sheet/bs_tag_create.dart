@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:wuwu/components/common/clickable.dart';
 import 'package:wuwu/components/common/input_box.dart';
 import 'package:wuwu/components/common/styled_text.dart';
 import 'package:wuwu/styles/button.dart';
@@ -15,9 +16,11 @@ const List<Color> tagColorList = [
 ];
 
 /// 新建标签
+///
+/// { 'tagName': string, 'tagColor': string }
 class BSTagCreate extends StatelessWidget {
   final RxString tagName = ''.obs;
-  final RxInt tagColorValue = Palette.blue.value.obs;
+  final Rx<Color> tagColor = Palette.blue.obs;
 
   BSTagCreate({super.key});
 
@@ -25,7 +28,6 @@ class BSTagCreate extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: Get.width,
-      // height: Get.height / 2,
       decoration: const BoxDecoration(
         color: Palette.b20,
         borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
@@ -42,18 +44,33 @@ class BSTagCreate extends StatelessWidget {
               hintText: '请输入标签名',
               onChanged: (s) => tagName(s),
             ).paddingAll(16),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                const StyledText.XiaoBai('选择标签颜色:', fontSize: 18),
-                ...tagColorList.map(
-                  // todo 点击选择
-                  (tagColor) => CircleAvatar(
-                    radius: tagColor.value == tagColorValue.value ? 7 : 5,
-                    backgroundColor: tagColor,
-                  ),
-                ),
-              ],
+            Obx(
+              () => Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  const StyledText.XiaoBai('选择标签颜色:', fontSize: 18),
+                  ...tagColorList.map(
+                      // todo 点击选择
+                      (color) {
+                    bool isSelected = tagColor.value == color;
+
+                    return Clickable.custom(
+                      CircleAvatar(
+                        radius: isSelected ? 12 : 10,
+                        backgroundColor: color,
+                        child: isSelected
+                            ? const Icon(
+                                Icons.check,
+                                size: 18,
+                                color: Palette.b00,
+                              )
+                            : null,
+                      ),
+                      onClick: () => tagColor(color),
+                    );
+                  }),
+                ],
+              ),
             ).paddingSymmetric(horizontal: 16),
             Padding(
               padding: const EdgeInsets.all(16),
@@ -75,7 +92,10 @@ class BSTagCreate extends StatelessWidget {
                   Expanded(
                     child: ElevatedButton(
                       style: MyButtonStyle.confirm,
-                      onPressed: () {},
+                      onPressed: () => Get.back(result: {
+                        'tagName': tagName.value,
+                        'tagColor': tagColor,
+                      }),
                       child: const StyledText.XiaoBai(
                         '确认',
                         color: Palette.b00,
