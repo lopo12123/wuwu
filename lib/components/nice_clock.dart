@@ -24,8 +24,8 @@ final niceClock = Material(
   ),
   child: FlipClock(
     flipDirection: AxisDirection.down,
-    width: 48,
-    height: 64,
+    width: 52,
+    height: 72,
     digitSize: 48,
     separatorWidth: 4,
     backgroundColor: Palette.b90,
