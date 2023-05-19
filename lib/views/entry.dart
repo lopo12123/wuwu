@@ -5,6 +5,7 @@ import 'package:wuwu/styles/palette.dart';
 import 'package:wuwu/utils/safe_print.dart';
 import 'package:wuwu/views/tab_pages/dashboard.dart';
 import 'package:wuwu/views/tab_pages/home.dart';
+import 'package:wuwu/views/tab_pages/setting.dart';
 
 class _EntryController extends GetxController {
   final PageController pc = PageController(initialPage: 1);
@@ -36,11 +37,7 @@ class EntryView extends GetView<_EntryController> {
           // todo: test on android device.
           SafePrint.info('onPageChanged: $v');
         },
-        children: [
-          const DashboardPage(),
-          const HomePage(),
-          Container(color: Palette.red),
-        ],
+        children: const [DashboardPage(), HomePage(), SettingPage()],
       ),
     );
   }

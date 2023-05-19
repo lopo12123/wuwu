@@ -26,7 +26,7 @@ class MyApp extends StatelessWidget {
     final botToastBuilder = BotToastInit();
 
     GetMaterialApp app = GetMaterialApp(
-      // debugShowCheckedModeBanner: false,
+      debugShowCheckedModeBanner: false,
       title: 'wuwu',
       theme: ThemeData(
         appBarTheme: const AppBarTheme(backgroundColor: Palette.b90),
