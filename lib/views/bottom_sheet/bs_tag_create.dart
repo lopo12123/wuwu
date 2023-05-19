@@ -41,6 +41,7 @@ class BSTagCreate extends StatelessWidget {
                 .paddingSymmetric(vertical: 8),
             const Divider(height: 1, thickness: 1, color: Palette.b40),
             InputBox(
+              autoFocus: true,
               hintText: '请输入标签名',
               onChanged: (s) => tagName(s),
             ).paddingAll(16),

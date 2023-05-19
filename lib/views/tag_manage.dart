@@ -9,7 +9,6 @@ import 'package:wuwu/stores/collections/tag.dart';
 import 'package:wuwu/stores/global_store.dart';
 import 'package:wuwu/styles/palette.dart';
 import 'package:wuwu/utils/my_toast.dart';
-import 'package:wuwu/utils/safe_print.dart';
 import 'package:wuwu/views/bottom_sheet/bs_tag_create.dart';
 
 class _TagItem extends StatelessWidget {
@@ -37,7 +36,7 @@ class _TagItem extends StatelessWidget {
             child: StyledText.ShouShu(
               tag.tagName ?? '<暂无标签名>',
               fontSize: 16,
-              lineHeight: 24,
+              lineHeight: 20,
               fontWeight: FontWeight.w500,
               maxLines: 2,
               overflow: TextOverflow.ellipsis,

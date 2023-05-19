@@ -3,6 +3,7 @@ import 'package:wuwu/components/common/styled_text.dart';
 import 'package:wuwu/styles/palette.dart';
 
 class InputBox extends StatelessWidget {
+  final bool autoFocus;
   final int lines;
   final String hintText;
   final void Function(String code)? onChanged;
@@ -12,6 +13,7 @@ class InputBox extends StatelessWidget {
   InputBox({
     super.key,
     String? defaultText,
+    this.autoFocus = false,
     this.lines = 1,
     this.hintText = '',
     this.onChanged,
@@ -29,6 +31,7 @@ class InputBox extends StatelessWidget {
       alignment: Alignment.center,
       child: TextField(
         controller: tc,
+        autofocus: autoFocus,
         maxLines: lines,
         decoration: InputDecoration(
           isCollapsed: true,
