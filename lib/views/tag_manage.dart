@@ -119,6 +119,7 @@ class TagManageView extends GetView<_TagManageController> {
               ),
             ],
           ),
+          const Divider(height: 1, thickness: 1, color: Palette.b30),
           Expanded(
             child: RefreshIndicator(
               onRefresh: controller.syncTags,
