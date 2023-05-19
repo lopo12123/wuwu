@@ -14,6 +14,9 @@ class ToolBar extends StatelessWidget implements PreferredSizeWidget {
   final bool noTitle;
   final List<Widget>? actions;
 
+  /// 仅适用于 win, 是否取消额外的 action 按钮(最小化/最大化/关闭)
+  final bool extraActions;
+
   final tooltipTextStyle = const TextStyle(
     color: Palette.b10,
     fontSize: 14,
@@ -33,6 +36,7 @@ class ToolBar extends StatelessWidget implements PreferredSizeWidget {
     this.title = const StyledText.XiaoBai('呜呜'),
     this.noTitle = false,
     this.actions,
+    this.extraActions = false,
   });
 
   @override
@@ -42,7 +46,7 @@ class ToolBar extends StatelessWidget implements PreferredSizeWidget {
       centerTitle: true,
       leading: leading == null ? null : Center(child: leading),
       title: noTitle ? null : title,
-      actions: PlatformSpec.isWin
+      actions: PlatformSpec.isWin && extraActions
           ? [
               ...?actions,
               Tooltip(
