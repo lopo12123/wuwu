@@ -35,9 +35,9 @@ class _TagItem extends StatelessWidget {
           Expanded(
             child: StyledText.ShouShu(
               tag.tagName ?? '<暂无标签名>',
+              color: Palette.b90,
               fontSize: 16,
               lineHeight: 20,
-              fontWeight: FontWeight.w500,
               maxLines: 2,
               overflow: TextOverflow.ellipsis,
             ).paddingSymmetric(horizontal: 8),
@@ -115,7 +115,10 @@ class TagManageView extends GetView<_TagManageController> {
                 iconSize: 32,
                 padding: const EdgeInsets.only(left: 16),
                 onPressed: controller.requestTagCreate,
-                icon: const Icon(Icons.bookmark_add, color: Palette.b70),
+                icon: const Icon(
+                  Icons.bookmark_add_outlined,
+                  color: Palette.purple,
+                ),
               ),
             ],
           ),
