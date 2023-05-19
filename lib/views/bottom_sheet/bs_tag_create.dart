@@ -94,7 +94,7 @@ class BSTagCreate extends StatelessWidget {
                       style: MyButtonStyle.confirm,
                       onPressed: () => Get.back(result: {
                         'tagName': tagName.value,
-                        'tagColor': tagColorValue,
+                        'tagColor': tagColorValue.value,
                       }),
                       child: const StyledText.XiaoBai(
                         '确认',
