@@ -6,7 +6,6 @@ import 'package:wuwu/components/setting_item.dart';
 import 'package:wuwu/platform_spec/components/tool_bar.dart';
 import 'package:wuwu/routes/index.dart';
 import 'package:wuwu/styles/palette.dart';
-import 'package:wuwu/utils/my_toast.dart';
 
 class SettingPage extends StatelessWidget {
   const SettingPage({super.key});

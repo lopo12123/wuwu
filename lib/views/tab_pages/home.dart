@@ -31,14 +31,6 @@ class HomePage extends StatelessWidget {
               onPressed: () => MyToast.success('ok可以'),
               child: StyledText.JBMono('toast'),
             ),
-            // ElevatedButton(
-            //   onPressed: () => Get.toNamed(MyRoutes.db_viewer),
-            //   child: StyledText.JBMono('to db_viewer'),
-            // ),
-            // ElevatedButton(
-            //   onPressed: () => Get.toNamed(MyRoutes.path_lock),
-            //   child: StyledText.JBMono('to path_lock'),
-            // ),
           ],
         ),
       ),
