@@ -13,7 +13,7 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const ToolBar(),
+      appBar: const ToolBar(extraActions: true),
       body: Column(
         children: [
           niceClock.paddingSymmetric(vertical: 16),
