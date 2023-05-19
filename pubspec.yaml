@@ -29,6 +29,7 @@ environment:
 # versions available, run `flutter pub outdated`.
 dependencies:
   bot_toast:
+  curved_navigation_bar:
   ffi:
   flip_board:
   flutter:
