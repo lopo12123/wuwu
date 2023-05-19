@@ -24,7 +24,7 @@ class _TagItem extends StatelessWidget {
       margin: const EdgeInsets.symmetric(vertical: 8),
       padding: const EdgeInsets.symmetric(horizontal: 8),
       decoration: BoxDecoration(
-        color: Palette.b20,
+        color: Color(tag.colorHex ?? Palette.b20.value).withOpacity(0.3),
         borderRadius: BorderRadius.circular(4),
       ),
       child: Row(
@@ -76,7 +76,7 @@ class _TagManageController extends GetxController {
     }
   }
 
-  /// 打开新建标签的交互
+  /// 新建标签
   Future<void> requestTagCreate() async {
     var tagCfg = await Get.bottomSheet(BSTagCreate());
 
