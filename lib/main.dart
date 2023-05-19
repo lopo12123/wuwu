@@ -30,7 +30,7 @@ class MyApp extends StatelessWidget {
       title: 'wuwu',
       theme: ThemeData(
         appBarTheme: const AppBarTheme(backgroundColor: Palette.b90),
-        scaffoldBackgroundColor: Palette.b10,
+        scaffoldBackgroundColor: Palette.soft,
         fontFamily: StyledTextFamily.ShouShu,
         highlightColor: Palette.transparent,
         hoverColor: Palette.transparent,
