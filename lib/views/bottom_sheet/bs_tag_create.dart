@@ -39,7 +39,7 @@ class BSTagCreate extends StatelessWidget {
           children: [
             const StyledText.XiaoBai('新建标签', fontSize: 22)
                 .paddingSymmetric(vertical: 8),
-            const Divider(height: 1, thickness: 1, color: Palette.b40),
+            const Divider(height: 1, thickness: 1, color: Palette.b30),
             InputBox(
               autoFocus: true,
               hintText: '请输入标签名',
