@@ -17,10 +17,10 @@ const List<Color> tagColorList = [
 
 /// 新建标签
 ///
-/// { 'tagName': string, 'tagColor': string }
+/// { 'tagName': string, 'tagColorValue': string }
 class BSTagCreate extends StatelessWidget {
   final RxString tagName = ''.obs;
-  final Rx<Color> tagColor = Palette.blue.obs;
+  final RxInt tagColorValue = Palette.blue.value.obs;
 
   BSTagCreate({super.key});
 
@@ -52,7 +52,7 @@ class BSTagCreate extends StatelessWidget {
                   ...tagColorList.map(
                       // todo 点击选择
                       (color) {
-                    bool isSelected = tagColor.value == color;
+                    bool isSelected = tagColorValue.value == color.value;
 
                     return Clickable.custom(
                       CircleAvatar(
@@ -66,7 +66,7 @@ class BSTagCreate extends StatelessWidget {
                               )
                             : null,
                       ),
-                      onClick: () => tagColor(color),
+                      onClick: () => tagColorValue(color.value),
                     );
                   }),
                 ],
@@ -94,7 +94,7 @@ class BSTagCreate extends StatelessWidget {
                       style: MyButtonStyle.confirm,
                       onPressed: () => Get.back(result: {
                         'tagName': tagName.value,
-                        'tagColor': tagColor,
+                        'tagColor': tagColorValue,
                       }),
                       child: const StyledText.XiaoBai(
                         '确认',
