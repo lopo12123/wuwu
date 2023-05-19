@@ -16,8 +16,9 @@ abstract class DBStoreImpl {
       return;
     }
 
+    tag.createTime ??= DateTime.now();
+
     await _handle!.writeTxn(() async {
-      tag.createTime = DateTime.now();
       await _handle!.tags.put(tag);
     });
   }

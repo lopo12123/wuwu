@@ -10,7 +10,11 @@ class GlobalStoreImpl extends GetxService {
 
   final RxList<Tag> tags = <Tag>[].obs;
 
-  Future<void> addTag(Tag tag) async {
+  Future<void> addTag(String tagName, int tagColor) async {
+    Tag tag = Tag()
+      ..tagName = tagName
+      ..colorHex = tagColor
+      ..createTime = DateTime.now();
     await DBStoreImpl.addTag(tag);
     tags.add(tag);
   }

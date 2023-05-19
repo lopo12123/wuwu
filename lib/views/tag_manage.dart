@@ -10,6 +10,7 @@ import 'package:wuwu/stores/global_store.dart';
 import 'package:wuwu/styles/palette.dart';
 import 'package:wuwu/utils/my_toast.dart';
 import 'package:wuwu/utils/safe_print.dart';
+import 'package:wuwu/views/bottom_sheet/bs_tag_create.dart';
 
 class _TagItem extends StatelessWidget {
   final Tag tag;
@@ -76,9 +77,13 @@ class _TagManageController extends GetxController {
   }
 
   /// 打开新建标签的交互
-  void requestTagCreate() {
-    // todo
-    SafePrint.info('requestTagCreate');
+  Future<void> requestTagCreate() async {
+    var tagCfg = await Get.bottomSheet(BSTagCreate());
+
+    if (tagCfg != null) {
+      GlobalStoreImpl.store.addTag(tagCfg['tagName'], tagCfg['tagColor']);
+      MyToast.success('新建标签成功');
+    }
   }
 
   @override
