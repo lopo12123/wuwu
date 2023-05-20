@@ -29,6 +29,11 @@ class BSTagCreate extends StatelessWidget {
   Widget build(BuildContext context) {
     return bsBase(
       title: '新建标签',
+      onCancel: Get.back,
+      onConfirm: () => Get.back(result: {
+        'tagName': tagName.value,
+        'tagColor': tagColorValue.value,
+      }),
       children: [
         InputBox(
           autoFocus: true,
