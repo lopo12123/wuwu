@@ -29,7 +29,7 @@ class BSTagCreate extends StatelessWidget {
     return Container(
       width: Get.width,
       decoration: const BoxDecoration(
-        color: Palette.b20,
+        color: Palette.b00,
         borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
       ),
       child: SafeArea(
@@ -50,9 +50,7 @@ class BSTagCreate extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   const StyledText.XiaoBai('选择标签颜色:', fontSize: 18),
-                  ...tagColorList.map(
-                      // todo 点击选择
-                      (color) {
+                  ...tagColorList.map((color) {
                     bool isSelected = tagColorValue.value == color.value;
 
                     return Clickable.custom(
