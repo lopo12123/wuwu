@@ -37,11 +37,13 @@ dependencies:
   flutter_slidable:
   gesture_password_widget:
   get:
+  hive:
   isar:
   isar_flutter_libs:
   loading_animation_widget:
   logger:
   path_provider:
+  qr_flutter:
   win32:
   window_manager:
   windows_single_instance:

@@ -53,6 +53,7 @@ abstract class DBStoreImpl {
       return;
     }
 
+    // todo: test on android
     final docDir = await getApplicationDocumentsDirectory();
     final appDir = Directory('${docDir.path}${Platform.pathSeparator}wuwu');
 

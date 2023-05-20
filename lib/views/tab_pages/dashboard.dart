@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:wuwu/components/common/styled_text.dart';
 import 'package:wuwu/platform_spec/components/tool_bar.dart';
+import 'package:wuwu/stores/hive_store.dart';
 
 class _DashboardController extends GetxController {
   final RxInt val = 10.obs;
@@ -18,6 +19,12 @@ class DashboardPage extends GetView<_DashboardController> {
       appBar: const ToolBar(title: StyledText.XiaoBai('全览')),
       body: ListView(
         children: [
+          ElevatedButton(
+            onPressed: () {
+              // HiveStoreImpl.init();
+            },
+            child: StyledText.ShouShu('init hive'),
+          ),
         ],
       ),
     );
