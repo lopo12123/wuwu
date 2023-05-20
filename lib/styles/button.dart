@@ -6,6 +6,7 @@ abstract class MyButtonStyle {
   static final cancel = ElevatedButton.styleFrom(
     fixedSize: const Size.fromHeight(48),
     backgroundColor: Palette.b00,
+    disabledBackgroundColor: Palette.b00,
     shape: RoundedRectangleBorder(
       side: const BorderSide(color: Palette.b70),
       borderRadius: BorderRadius.circular(16),
@@ -16,6 +17,7 @@ abstract class MyButtonStyle {
   static final confirm = ElevatedButton.styleFrom(
     fixedSize: const Size.fromHeight(48),
     backgroundColor: Palette.b90,
+    disabledBackgroundColor: Palette.b90,
     shape: RoundedRectangleBorder(
       borderRadius: BorderRadius.circular(16),
     ),
