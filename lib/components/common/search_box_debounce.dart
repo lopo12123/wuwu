@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:wuwu/components/common/styled_text.dart';
 import 'package:wuwu/styles/palette.dart';
 
 /// 搜索输入框状态

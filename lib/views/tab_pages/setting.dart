@@ -5,6 +5,7 @@ import 'package:wuwu/components/setting_item.dart';
 import 'package:wuwu/platform_spec/components/tool_bar.dart';
 import 'package:wuwu/routes/index.dart';
 import 'package:wuwu/styles/palette.dart';
+import 'package:wuwu/views/bottom_sheet/bs_home_setting.dart';
 
 class SettingPage extends StatelessWidget {
   const SettingPage({super.key});
@@ -20,9 +21,7 @@ class SettingPage extends StatelessWidget {
             text: '首页设置',
             icon: const Icon(Icons.list, color: Palette.purple),
             suffix: const Icon(Icons.arrow_right, color: Palette.b50),
-            onPressed: () {
-              // todo: 设置首页显示内容(最近[记录/收入/支出]的[n]条)
-            },
+            onPressed: () => Get.bottomSheet(const BSHomeSetting()),
           ),
           const SizedBox(height: 16),
           SettingItem(
@@ -32,7 +31,6 @@ class SettingPage extends StatelessWidget {
             onPressed: () => Get.toNamed(MyRoutes.tag_manage),
           ),
           const SizedBox(height: 16),
-
           SettingItem(
             text: '手势密码',
             icon: const Icon(Icons.fingerprint_outlined, color: Palette.purple),

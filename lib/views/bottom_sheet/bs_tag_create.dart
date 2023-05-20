@@ -3,7 +3,6 @@ import 'package:get/get.dart';
 import 'package:wuwu/components/common/clickable.dart';
 import 'package:wuwu/components/common/input_box.dart';
 import 'package:wuwu/components/common/styled_text.dart';
-import 'package:wuwu/styles/button.dart';
 import 'package:wuwu/styles/palette.dart';
 import 'package:wuwu/views/bottom_sheet/bs_base.dart';
 

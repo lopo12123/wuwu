@@ -2,7 +2,6 @@ import 'dart:io';
 
 import 'package:isar/isar.dart';
 import 'package:path_provider/path_provider.dart';
-import 'package:wuwu/misc/result.dart';
 import 'package:wuwu/stores/collections/tag.dart';
 import 'package:wuwu/utils/my_toast.dart';
 import 'package:wuwu/utils/safe_print.dart';
