@@ -59,7 +59,7 @@ class _TagManageController extends GetxController {
 
   /// 从数据库获取最新的标签列表
   Future<void> syncTags([bool toast = true]) async {
-    await GlobalStoreImpl.store.init(toast: toast, tag: true);
+    await GlobalStoreImpl.store.sync(toast: toast, tag: true);
     tagList(GlobalStoreImpl.store.tags);
   }
 

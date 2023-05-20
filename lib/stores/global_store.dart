@@ -6,10 +6,18 @@ import 'package:wuwu/utils/my_toast.dart';
 import 'package:wuwu/utils/safe_print.dart';
 
 class GlobalStoreImpl extends GetxService {
+  /// 单例
   static GlobalStoreImpl get store => Get.find<GlobalStoreImpl>();
 
+  // region 首页
+
+  // endregion
+
+  // region 标签
+  /// 全部标签
   final RxList<Tag> tags = <Tag>[].obs;
 
+  /// 新建标签
   Future<void> addTag(String tagName, int tagColor) async {
     Tag tag = Tag()
       ..tagName = tagName
@@ -19,21 +27,28 @@ class GlobalStoreImpl extends GetxService {
     tags.add(tag);
   }
 
+  /// 删除标签
   Future<void> deleteTag(int tagId) async {
     await DBStoreImpl.deleteTag(tagId);
     tags.removeWhere((tag) => tag.id == tagId);
   }
 
-  final RxList<Consumption> records = <Consumption>[].obs;
+  // endregion
 
-  Future<void> init({toast = false, tag = false, consumption = false}) async {
-    await DBStoreImpl.init();
+  // final RxList<Consumption> records = <Consumption>[].obs;
 
+  /// 同步数据
+  Future<void> sync({toast = false, tag = false, consumption = false}) async {
     if (tag) {
       tags(await DBStoreImpl.getAllTags());
       SafePrint.info('[GlobalStoreImpl] init(tag) done.');
     }
 
     if (toast) MyToast.success('刷新成功');
+  }
+
+  /// 初始化 isar、hive 等
+  Future<void> init() async {
+    await DBStoreImpl.init();
   }
 }
