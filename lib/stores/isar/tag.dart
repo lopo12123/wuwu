@@ -29,6 +29,6 @@ class Tag {
 
   @override
   String toString() {
-    return jsonEncode(toJson());
+    return '<class "Tag"> {id: $id, createTime: ${createTime?.toIso8601String()}, tagName: $tagName, colorHex: ${colorHex?.toRadixString(16)}}';
   }
 }

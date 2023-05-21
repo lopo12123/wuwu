@@ -19,4 +19,9 @@ class HomeSetting extends HiveObject {
   HomeSetting({required this.type, required this.count});
 
   static HomeSetting get defaultValue => HomeSetting(type: 0, count: 5);
+
+  @override
+  String toString() {
+    return '<class "HomeSetting"> {type: $type, count: $count}';
+  }
 }

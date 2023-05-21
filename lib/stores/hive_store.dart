@@ -24,7 +24,7 @@ abstract class HiveStoreImpl {
   /// 修改首页设置
   static Future<void> setHomeSetting({int? type, int? count}) async {
     assert(type != null || count != null);
-    assert(type == null || (type >= 1 && type <= 3));
+    assert(type == null || (type >= 0 && type <= 2));
     assert(count == null || (count >= 1 && count <= 20));
 
     HomeSetting cfg = _handle?.get(
