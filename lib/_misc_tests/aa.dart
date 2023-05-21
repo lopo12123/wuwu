@@ -1,3 +1,6 @@
 void main() {
-  print(0.1+0.2);
+  var a = [1,2,3];
+  var b = [1,2,3];
+
+  print(a == b);
 }

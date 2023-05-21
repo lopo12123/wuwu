@@ -5,6 +5,16 @@ import 'package:wuwu/stores/db_store.dart';
 import 'package:wuwu/utils/my_toast.dart';
 import 'package:wuwu/utils/safe_print.dart';
 
+bool _equal(Iterable<int> l1, Iterable<int> l2) {
+  if (l1.length != l2.length) return false;
+
+  for (int i = 0; i < l1.length; i++) {
+    if (l1.elementAt(i) != l2.elementAt(i)) return false;
+  }
+
+  return true;
+}
+
 class GlobalStoreImpl extends GetxService {
   /// 单例
   static GlobalStoreImpl get store => Get.find<GlobalStoreImpl>();
@@ -30,6 +40,20 @@ class GlobalStoreImpl extends GetxService {
 
     await HiveStoreImpl.setHomeSetting(count: v);
     homeListCount(v);
+  }
+
+  // endregion
+
+  // region 手势密码
+  /// 手势密码 (为空列表表示未启用)
+  final RxList<int> gesturePsw = <int>[].obs;
+
+  /// 修改手势密码
+  Future<void> changeGesturePsw(List<int> v) async {
+    if (_equal(gesturePsw, v)) return;
+
+    await HiveStoreImpl.setGesturePassword(v);
+    gesturePsw(v);
   }
 
   // endregion

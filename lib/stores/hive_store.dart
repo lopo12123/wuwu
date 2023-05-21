@@ -40,6 +40,25 @@ abstract class HiveStoreImpl {
 
   // endregion
 
+  // region 手势密码
+  /// 获取手势密码
+  static Future<List<int>> getGesturePassword() async {
+    await requireInitialized();
+
+    List<int> p = _handle?.get(_hiveKeyGesturePassword, defaultValue: <int>[]);
+    return p;
+  }
+
+  /// 设置手势密码
+  static Future<void> setGesturePassword(List<int> v) async {
+    await requireInitialized();
+
+    // 此次不添加 await 也可以, 修改会在内存中立即生效.
+    await _handle?.put(_hiveKeyGesturePassword, v);
+  }
+
+  // endregion
+
   // region lifecycle
   /// 确保已初始化
   static Future<void> requireInitialized() async {

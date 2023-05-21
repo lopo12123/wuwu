@@ -4,6 +4,7 @@ import 'package:wuwu/components/common/styled_text.dart';
 import 'package:wuwu/components/setting_item.dart';
 import 'package:wuwu/platform_spec/components/tool_bar.dart';
 import 'package:wuwu/routes/index.dart';
+import 'package:wuwu/stores/global_store.dart';
 import 'package:wuwu/styles/palette.dart';
 import 'package:wuwu/views/bottom_sheet/bs_home_setting.dart';
 
@@ -37,6 +38,8 @@ class SettingPage extends StatelessWidget {
             suffix: const Icon(Icons.arrow_right, color: Palette.b50),
             onPressed: () {
               // todo: 设置手势密码
+
+              GlobalStoreImpl.store.changeGesturePsw([1,2,3]);
             },
           ),
         ],
