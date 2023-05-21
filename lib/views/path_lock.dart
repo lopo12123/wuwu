@@ -8,12 +8,16 @@ class PathLockView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      appBar: ToolBar(
+    return Scaffold(
+      appBar: const ToolBar(
         leading: Icon(Icons.lock_outline),
         title: StyledText.XiaoBai('手势密码'),
       ),
-      body: Center(child: GraphPassword()),
+      body: Center(
+        child: GraphPassword(
+          onComplete: (answer) {},
+        ),
+      ),
     );
   }
 }

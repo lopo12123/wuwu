@@ -15,7 +15,7 @@ class HomePage extends StatelessWidget {
       body: Column(
         children: [
           niceClock.paddingSymmetric(vertical: 32),
-          const Divider(height: 1, thickness: 1, color: Palette.b30),
+          const Divider(height: 1, thickness: 1),
           Expanded(
             child: ListView(
               padding: const EdgeInsets.all(16),

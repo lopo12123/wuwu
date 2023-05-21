@@ -36,6 +36,7 @@ class MyApp extends StatelessWidget {
         hoverColor: Palette.transparent,
         splashColor: Palette.transparent,
         splashFactory: NoSplash.splashFactory,
+        dividerColor: Palette.b30,
       ),
       initialRoute: MyRoutes.entry,
       unknownRoute: invalidPage,

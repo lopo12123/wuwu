@@ -23,7 +23,7 @@ Widget bsBase({
         mainAxisSize: MainAxisSize.min,
         children: [
           StyledText.XiaoBai(title, fontSize: 22).paddingSymmetric(vertical: 8),
-          const Divider(height: 1, thickness: 1, color: Palette.b30),
+          const Divider(height: 1, thickness: 1),
           ...children,
           if (operators)
             Padding(

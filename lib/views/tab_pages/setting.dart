@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:gesture_password_widget/gesture_password_widget.dart';
 import 'package:get/get.dart';
 import 'package:wuwu/components/common/styled_text.dart';
+import 'package:wuwu/components/graph_password.dart';
 import 'package:wuwu/components/setting_item.dart';
 import 'package:wuwu/platform_spec/components/tool_bar.dart';
 import 'package:wuwu/routes/index.dart';
 import 'package:wuwu/stores/global_store.dart';
 import 'package:wuwu/styles/palette.dart';
+import 'package:wuwu/utils/safe_print.dart';
+import 'package:wuwu/views/bottom_sheet/bs_gesture_psw.dart';
 import 'package:wuwu/views/bottom_sheet/bs_home_setting.dart';
 
 class SettingPage extends StatelessWidget {
@@ -36,12 +40,17 @@ class SettingPage extends StatelessWidget {
             text: '手势密码',
             icon: const Icon(Icons.fingerprint_outlined, color: Palette.purple),
             suffix: const Icon(Icons.arrow_right, color: Palette.b50),
-            onPressed: () {
-              // todo: 设置手势密码
-
-              GlobalStoreImpl.store.changeGesturePsw([1,2,3]);
-            },
+            onPressed: () => Get.bottomSheet(const BSGesturePsw()),
           ),
+          // Container(
+          //   child: Center(
+          //     child: GraphPassword(
+          //       onComplete: (answer) {
+          //         SafePrint.info('input: $answer');
+          //       },
+          //     ),
+          //   ),
+          // )
         ],
       ),
     );

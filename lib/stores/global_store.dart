@@ -86,6 +86,7 @@ class GlobalStoreImpl extends GetxService {
   Future<void> sync({
     toast = false,
     homeCfg = false,
+    gpsw = false,
     tag = false,
     // consumption = false,
   }) async {
@@ -94,6 +95,11 @@ class GlobalStoreImpl extends GetxService {
       homeListType(cfg.type);
       homeListCount(cfg.count);
       SafePrint.info('[sync] homeCfg done.');
+    }
+    if (gpsw) {
+      var psw = await HiveStoreImpl.getGesturePassword();
+      gesturePsw(psw);
+      SafePrint.info('[sync] gpsw done.');
     }
     if (tag) {
       tags(await DBStoreImpl.getAllTags());
@@ -107,6 +113,7 @@ class GlobalStoreImpl extends GetxService {
   Future<void> syncAll([toast = false]) => sync(
         toast: toast,
         homeCfg: true,
+        gpsw: true,
         tag: true,
       );
 
