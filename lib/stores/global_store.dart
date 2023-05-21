@@ -79,6 +79,13 @@ class GlobalStoreImpl extends GetxService {
     if (toast) MyToast.success('刷新成功');
   }
 
+  /// alias for sync with all flags true
+  Future<void> syncAll([toast = false]) => sync(
+        toast: toast,
+        homeCfg: true,
+        tag: true,
+      );
+
   /// 初始化
   Future<void> init() async {
     await DBStoreImpl.init();
@@ -86,7 +93,7 @@ class GlobalStoreImpl extends GetxService {
 
     SafePrint.info('[GlobalStoreImpl] initialized.');
 
-    sync(homeCfg: true, tag: true);
+    syncAll();
   }
 
   /// 注销
