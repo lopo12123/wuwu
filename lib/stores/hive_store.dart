@@ -53,10 +53,10 @@ abstract class HiveStoreImpl {
       return;
     }
 
-    final cfgBox = await (Hive
-          ..initFlutter('wuwu')
-          ..registerAdapter(HomeSettingAdapter(), override: true))
-        .openBox('appCfg');
+    await Hive.initFlutter('wuwu');
+    Hive.registerAdapter(HomeSettingAdapter(), override: true);
+
+    final cfgBox = await Hive.openBox('appCfg');
     _handle = cfgBox;
   }
 
