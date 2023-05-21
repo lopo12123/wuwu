@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:wuwu/components/common/styled_text.dart';
 import 'package:wuwu/platform_spec/components/tool_bar.dart';
-import 'package:wuwu/stores/hive_store.dart';
 
 class _DashboardController extends GetxController {
   final RxInt val = 10.obs;

@@ -38,6 +38,7 @@ dependencies:
   gesture_password_widget:
   get:
   hive:
+  hive_flutter: 
   isar:
   isar_flutter_libs:
   loading_animation_widget:
@@ -57,6 +58,7 @@ dev_dependencies:
   flutter_launcher_icons:
   flutter_test:
     sdk: flutter
+  hive_generator:
   isar_generator:
   build_runner:
 

@@ -2,21 +2,16 @@ import 'dart:io';
 
 import 'package:isar/isar.dart';
 import 'package:path_provider/path_provider.dart';
-import 'package:wuwu/stores/collections/tag.dart';
-import 'package:wuwu/utils/my_toast.dart';
+import 'package:wuwu/stores/isar/tag.dart';
 import 'package:wuwu/utils/safe_print.dart';
 
 abstract class DBStoreImpl {
   // region 标签
   /// 增加标签
   static Future<void> addTag(Tag tag) async {
-    if (_handle == null) {
-      MyToast.error('数据库初始化失败');
-      return;
-    }
+    await requireInitialized();
 
     tag.createTime ??= DateTime.now();
-
     await _handle!.writeTxn(() async {
       await _handle!.tags.put(tag);
     });
@@ -24,10 +19,7 @@ abstract class DBStoreImpl {
 
   /// 删除标签
   static Future deleteTag(Id tagId) async {
-    if (_handle == null) {
-      MyToast.error('数据库初始化失败');
-      return;
-    }
+    await requireInitialized();
 
     await _handle!.writeTxn(() async {
       await _handle!.tags.delete(tagId);
@@ -36,10 +28,7 @@ abstract class DBStoreImpl {
 
   /// 获取所有标签
   static Future<List<Tag>> getAllTags() async {
-    if (_handle == null) {
-      MyToast.error('数据库初始化失败');
-      return [];
-    }
+    await requireInitialized();
 
     return await _handle!.tags.where().sortByCreateTime().findAll();
   }
@@ -47,6 +36,12 @@ abstract class DBStoreImpl {
   // endregion
 
   // region lifecycle
+  /// 确保已初始化
+  static Future<void> requireInitialized() async {
+    if (_handle == null) await init();
+  }
+
+  /// 初始化
   static Future<void> init() async {
     if (_handle?.isOpen == true) {
       SafePrint.info('[DBStoreImpl] re-init (skip)');
@@ -70,9 +65,10 @@ abstract class DBStoreImpl {
     _handle = isar;
   }
 
+  /// 注销
   static Future<void> dispose() async {
     bool? r = await _handle?.close();
-    SafePrint.info('[DBStoreImpl] close: $r');
+    SafePrint.info('[DBStoreImpl] closed($r)');
   }
 
   // endregion

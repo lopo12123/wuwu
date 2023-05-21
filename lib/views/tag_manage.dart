@@ -5,7 +5,7 @@ import 'package:wuwu/components/common/styled_text.dart';
 import 'package:wuwu/components/empty_list.dart';
 import 'package:wuwu/components/slidable_widget.dart';
 import 'package:wuwu/platform_spec/components/tool_bar.dart';
-import 'package:wuwu/stores/collections/tag.dart';
+import 'package:wuwu/stores/isar/tag.dart';
 import 'package:wuwu/stores/global_store.dart';
 import 'package:wuwu/styles/palette.dart';
 import 'package:wuwu/utils/my_toast.dart';
