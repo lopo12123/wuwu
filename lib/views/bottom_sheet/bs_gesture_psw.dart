@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:wuwu/components/common/styled_text.dart';
+import 'package:wuwu/dialogs/gesture_psw.dart';
+import 'package:wuwu/extension/list.dart';
 import 'package:wuwu/stores/global_store.dart';
 import 'package:wuwu/styles/button.dart';
+import 'package:wuwu/utils/my_toast.dart';
 import 'package:wuwu/utils/safe_print.dart';
 import 'package:wuwu/views/bottom_sheet/bs_base.dart';
 
@@ -16,7 +19,20 @@ class _BSGesturePswController extends GetxController {
 
   /// 设置手势密码
   Future<void> createGPsw() async {
-    SafePrint.info('createGPsw');
+    List<int>? psw1 = await GesturePswDialog.show('绘制解锁图案');
+    if (psw1 == null) return;
+
+    List<int>? psw2 = await GesturePswDialog.show('再次绘制图案');
+    if (psw2 == null) return;
+
+    bool isEqual = psw1.isEqualTo(psw2);
+    if (!isEqual) {
+      SafePrint.info('[createGPsw] inconsistent (psw1: $psw1, psw2: $psw2)');
+      MyToast.warn('两次输入不一致');
+    } else {
+      GlobalStoreImpl.store.changeGesturePsw(psw1);
+      MyToast.success('设置成功');
+    }
   }
 
   /// 修改手势密码

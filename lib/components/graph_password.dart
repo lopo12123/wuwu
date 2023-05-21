@@ -8,13 +8,14 @@ class GraphPassword extends StatelessWidget {
 
   final void Function(List<int> answer) onComplete;
 
-  const GraphPassword({super.key, required this.onComplete, this.size = 250});
+  const GraphPassword({super.key, required this.onComplete, this.size = 220});
 
   @override
   Widget build(BuildContext context) {
     return GesturePasswordWidget(
       size: size,
       loose: false,
+      color: Palette.transparent,
       lineWidth: 0.5,
       lineColor: Palette.b90,
       errorLineColor: Palette.red,

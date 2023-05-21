@@ -1,19 +1,10 @@
 import 'package:get/get.dart';
+import 'package:wuwu/extension/list.dart';
 import 'package:wuwu/stores/hive_store.dart';
 import 'package:wuwu/stores/isar/tag.dart';
 import 'package:wuwu/stores/db_store.dart';
 import 'package:wuwu/utils/my_toast.dart';
 import 'package:wuwu/utils/safe_print.dart';
-
-bool _equal(Iterable<int> l1, Iterable<int> l2) {
-  if (l1.length != l2.length) return false;
-
-  for (int i = 0; i < l1.length; i++) {
-    if (l1.elementAt(i) != l2.elementAt(i)) return false;
-  }
-
-  return true;
-}
 
 class GlobalStoreImpl extends GetxService {
   /// 单例
@@ -50,7 +41,7 @@ class GlobalStoreImpl extends GetxService {
 
   /// 修改手势密码
   Future<void> changeGesturePsw(List<int> v) async {
-    if (_equal(gesturePsw, v)) return;
+    if (v.isEqualTo(gesturePsw)) return;
 
     await HiveStoreImpl.setGesturePassword(v);
     gesturePsw(v);
