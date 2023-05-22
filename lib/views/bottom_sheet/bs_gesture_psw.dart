@@ -14,7 +14,9 @@ class _BSGesturePswController extends GetxController {
 
   /// 检验手势密码
   Future<bool> _preCheck() async {
-    return true;
+    List<int>? psw = await GesturePswDialog.show('验证手势密码');
+    bool isVerified = psw != null && gpsw.isEqualTo(psw);
+    return isVerified;
   }
 
   /// 设置手势密码
@@ -37,13 +39,19 @@ class _BSGesturePswController extends GetxController {
 
   /// 修改手势密码
   Future<void> editGPsw() async {
-    SafePrint.info('editGPsw');
+    if (await _preCheck()) {
+      createGPsw();
+    } else {
+      MyToast.warn('验证失败');
+    }
   }
 
   /// 停用手势密码
   Future<void> removeGPsw() async {
     if (await _preCheck()) {
       GlobalStoreImpl.store.changeGesturePsw([]);
+    } else {
+      MyToast.warn('验证失败');
     }
   }
 
