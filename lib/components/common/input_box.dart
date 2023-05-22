@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:wuwu/components/common/styled_text.dart';
 import 'package:wuwu/styles/palette.dart';
+import 'package:wuwu/utils/text_formatter.dart';
 
 class InputBox extends StatelessWidget {
   final bool autoFocus;
   final int lines;
+  final bool numberType;
   final String hintText;
   final void Function(String code)? onChanged;
 
@@ -15,6 +18,7 @@ class InputBox extends StatelessWidget {
     String? defaultText,
     this.autoFocus = false,
     this.lines = 1,
+    this.numberType = false,
     this.hintText = '',
     this.onChanged,
   }) : tc = TextEditingController(text: defaultText);
@@ -33,6 +37,12 @@ class InputBox extends StatelessWidget {
         controller: tc,
         autofocus: autoFocus,
         maxLines: lines,
+        inputFormatters: numberType
+            ? [
+                FilteringTextInputFormatter.allow(RegExp('[0-9.]')),
+                NumberTextInputFormatter(),
+              ]
+            : null,
         decoration: InputDecoration(
           isCollapsed: true,
           border: InputBorder.none,
