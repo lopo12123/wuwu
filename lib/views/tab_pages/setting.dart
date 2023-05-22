@@ -1,14 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:gesture_password_widget/gesture_password_widget.dart';
 import 'package:get/get.dart';
 import 'package:wuwu/components/common/styled_text.dart';
-import 'package:wuwu/components/graph_password.dart';
 import 'package:wuwu/components/setting_item.dart';
 import 'package:wuwu/platform_spec/components/tool_bar.dart';
 import 'package:wuwu/routes/index.dart';
-import 'package:wuwu/stores/global_store.dart';
 import 'package:wuwu/styles/palette.dart';
-import 'package:wuwu/utils/safe_print.dart';
 import 'package:wuwu/views/bottom_sheet/bs_gesture_psw.dart';
 import 'package:wuwu/views/bottom_sheet/bs_home_setting.dart';
 
@@ -42,15 +38,6 @@ class SettingPage extends StatelessWidget {
             suffix: const Icon(Icons.arrow_right, color: Palette.b50),
             onPressed: () => Get.bottomSheet(const BSGesturePsw()),
           ),
-          // Container(
-          //   child: Center(
-          //     child: GraphPassword(
-          //       onComplete: (answer) {
-          //         SafePrint.info('input: $answer');
-          //       },
-          //     ),
-          //   ),
-          // )
         ],
       ),
     );
