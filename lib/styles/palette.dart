@@ -39,7 +39,13 @@ abstract class Palette {
   static const b100 = Color(0xFF000000);
 
   /// 0xFFF0F2F9
-  static const soft = Color(0xFFF0F2F9);
+  static const blueSoft = Color(0xFFF0F2F9);
+
+  /// 0xFFA6B4FF
+  static const blueLight = Color(0xFFA6B4FF);
+
+  /// 0xFFD2FA64
+  static const lemon = Color(0xFFD2FA64);
 
   /// 0xFF1982C4
   static const blue = Color(0xFF332CF5);
