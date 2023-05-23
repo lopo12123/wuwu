@@ -1,6 +1,7 @@
 import 'package:get/get.dart';
 import 'package:wuwu/extension/list.dart';
 import 'package:wuwu/stores/hive_store.dart';
+import 'package:wuwu/stores/isar/consumption.dart';
 import 'package:wuwu/stores/isar/tag.dart';
 import 'package:wuwu/stores/db_store.dart';
 import 'package:wuwu/utils/my_toast.dart';
@@ -71,7 +72,11 @@ class GlobalStoreImpl extends GetxService {
 
   // endregion
 
-  // final RxList<Consumption> records = <Consumption>[].obs;
+  // region 记录
+  /// 最近20条
+  final RxList<Consumption> recent20 = <Consumption>[].obs;
+
+  // endregion
 
   /// 同步数据
   Future<void> sync({
@@ -79,7 +84,7 @@ class GlobalStoreImpl extends GetxService {
     homeCfg = false,
     gpsw = false,
     tag = false,
-    // consumption = false,
+    consumption = false,
   }) async {
     if (homeCfg) {
       var cfg = await HiveStoreImpl.getHomeSetting();
@@ -96,6 +101,9 @@ class GlobalStoreImpl extends GetxService {
       tags(await DBStoreImpl.getAllTags());
       SafePrint.info('[sync] tag done.');
     }
+    if(consumption) {
+      // todo
+    }
 
     if (toast) MyToast.success('刷新成功');
   }
@@ -106,6 +114,7 @@ class GlobalStoreImpl extends GetxService {
         homeCfg: true,
         gpsw: true,
         tag: true,
+        consumption: true,
       );
 
   /// 初始化

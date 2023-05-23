@@ -4,6 +4,8 @@ import 'package:wuwu/components/common/input_box.dart';
 import 'package:wuwu/components/common/styled_text.dart';
 import 'package:wuwu/components/nice_clock.dart';
 import 'package:wuwu/platform_spec/components/tool_bar.dart';
+import 'package:wuwu/stores/db_store.dart';
+import 'package:wuwu/stores/isar/consumption.dart';
 import 'package:wuwu/styles/palette.dart';
 import 'package:wuwu/utils/safe_print.dart';
 import 'package:wuwu/views/bottom_sheet/bs_consumption_create.dart';
@@ -11,9 +13,16 @@ import 'package:wuwu/views/bottom_sheet/bs_consumption_create.dart';
 class HomePage extends StatelessWidget {
   /// 新增一条记录
   Future<void> createConsumptionRecord() async {
-    var record = await Get.bottomSheet(const BSConsumptionCreate());
+    Consumption? consumption = await Get.bottomSheet(
+      const BSConsumptionCreate(),
+      isScrollControlled: true,
+    );
 
-    SafePrint.info('record: $record');
+    if(consumption != null) {
+      DBStoreImpl.addConsumption(consumption);
+    }
+
+    SafePrint.info('consumption: $consumption');
   }
 
   const HomePage({super.key});
@@ -39,7 +48,13 @@ class HomePage extends StatelessWidget {
                 StyledText.ShouShu('最近 n 笔消费'),
                 StyledText.ShouShu('最近 n 笔消费'),
                 StyledText.ShouShu('最近 n 笔消费'),
-                InputBox(numberType: true),
+                ElevatedButton(
+                  onPressed: () async {
+                    var r = await DBStoreImpl.getConsumptionByTime();
+                    SafePrint.info(r);
+                  },
+                  child: StyledText.ShouShu('查询'),
+                ),
               ],
             ),
           ),
