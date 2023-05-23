@@ -2,19 +2,48 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:wuwu/components/common/input_box.dart';
 import 'package:wuwu/components/common/styled_text.dart';
+import 'package:wuwu/components/tag_label.dart';
 import 'package:wuwu/stores/global_store.dart';
+import 'package:wuwu/stores/isar/consumption.dart';
 import 'package:wuwu/stores/isar/tag.dart';
 import 'package:wuwu/styles/palette.dart';
+import 'package:wuwu/utils/my_toast.dart';
 import 'package:wuwu/views/bottom_sheet/bs_base.dart';
+import 'package:wuwu/views/bottom_sheet/bs_tag_picker.dart';
 
 class _BSConsumptionCreateController extends GetxController {
   /// 全部的可用标签
   List<Tag> get allTags => GlobalStoreImpl.store.tags;
 
+  Iterable<Tag> get selectedTags =>
+      allTags.where((tag) => tags.contains(tag.id));
+
   final RxBool income = false.obs;
-  final RxDouble amount = 0.0.obs;
+  final RxDouble amount = (-1.0).obs;
   final RxString desc = ''.obs;
   final RxSet<int> tags = <int>{}.obs;
+
+  Future<void> pickTag() async {
+    Set<int>? tagIds = await Get.bottomSheet(
+      BSTagPicker(initialTags: tags.toSet()),
+    );
+
+    if (tagIds != null) tags(tagIds);
+  }
+
+  void submitForm() {
+    if (amount.value == -1) {
+      MyToast.warn('请输入金额');
+    } else {
+      Get.back(
+        result: Consumption()
+          ..income = income.value
+          ..amount = amount.value
+          ..desc = desc.value
+          ..tags = tags.toList(),
+      );
+    }
+  }
 }
 
 class BSConsumptionCreate extends GetView<_BSConsumptionCreateController> {
@@ -26,6 +55,8 @@ class BSConsumptionCreate extends GetView<_BSConsumptionCreateController> {
 
     return bsBase(
       title: '新增记录',
+      onCancel: Get.back,
+      onConfirm: controller.submitForm,
       children: [
         Obx(
           () => Row(
@@ -84,8 +115,51 @@ class BSConsumptionCreate extends GetView<_BSConsumptionCreateController> {
             ),
           ],
         ).paddingAll(16),
-        // todo: 标签列表选择
-        Row()
+        Row(
+          children: [
+            const StyledText.XiaoBai('标签:', fontSize: 22)
+                .paddingOnly(right: 16),
+            Expanded(
+              child: Obx(
+                () => controller.tags.isEmpty
+                    ? const StyledText.ShouShu(
+                        '暂无标签',
+                        color: Palette.b50,
+                        fontSize: 16,
+                      )
+                    : SizedBox(
+                        height: 30,
+                        child: ListView(
+                          scrollDirection: Axis.horizontal,
+                          children: controller.selectedTags
+                              .map(
+                                (tag) => tagLabel(
+                                  tag: tag,
+                                  margin: const EdgeInsets.only(right: 8),
+                                ),
+                              )
+                              .toList(),
+                        ),
+                      ),
+              ),
+            ),
+            const SizedBox(width: 8),
+            ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                fixedSize: const Size.fromHeight(30),
+                backgroundColor: Palette.b00,
+                disabledBackgroundColor: Palette.b00,
+                shape: RoundedRectangleBorder(
+                  side: const BorderSide(width: 0.5, color: Palette.b40),
+                  borderRadius: BorderRadius.circular(15),
+                ),
+              ),
+              onPressed: controller.pickTag,
+              child: const StyledText.ShouShu('选择', color: Palette.b90),
+            ),
+          ],
+        ).paddingSymmetric(horizontal: 16),
+        const SizedBox(height: 16),
       ],
     );
   }
