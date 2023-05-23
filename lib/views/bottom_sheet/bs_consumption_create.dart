@@ -8,6 +8,7 @@ import 'package:wuwu/stores/isar/consumption.dart';
 import 'package:wuwu/stores/isar/tag.dart';
 import 'package:wuwu/styles/palette.dart';
 import 'package:wuwu/utils/my_toast.dart';
+import 'package:wuwu/utils/safe_print.dart';
 import 'package:wuwu/views/bottom_sheet/bs_base.dart';
 import 'package:wuwu/views/bottom_sheet/bs_tag_picker.dart';
 
@@ -108,9 +109,7 @@ class BSConsumptionCreate extends GetView<_BSConsumptionCreateController> {
               child: InputBox(
                 hintText: '描述（可选）',
                 lines: 2,
-                onChanged: (val) {
-                  controller.amount(double.tryParse(val) ?? 0);
-                },
+                onChanged: (val) => controller.desc(val),
               ),
             ),
           ],
