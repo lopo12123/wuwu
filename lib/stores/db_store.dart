@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:isar/isar.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:wuwu/stores/isar/consumption.dart';
 import 'package:wuwu/stores/isar/tag.dart';
 import 'package:wuwu/utils/safe_print.dart';
 
@@ -18,7 +19,7 @@ abstract class DBStoreImpl {
   }
 
   /// 删除标签
-  static Future deleteTag(Id tagId) async {
+  static Future<void> deleteTag(Id tagId) async {
     await requireInitialized();
 
     await _handle!.writeTxn(() async {
@@ -31,6 +32,45 @@ abstract class DBStoreImpl {
     await requireInitialized();
 
     return await _handle!.tags.where().sortByCreateTime().findAll();
+  }
+
+  // endregion
+
+  // region 记录
+  /// 增加记录
+  static Future<void> addConsumption(Consumption consumption) async {
+    await requireInitialized();
+
+    consumption.createTime ??= DateTime.now();
+    await _handle!.writeTxn(() async {
+      await _handle!.consumptions.put(consumption);
+    });
+  }
+
+  /// 删除记录
+  static Future<void> deleteConsumption(Id consumptionId) async {
+    await requireInitialized();
+
+    await _handle!.writeTxn(() async {
+      await _handle!.consumptions.delete(consumptionId);
+    });
+  }
+
+  /// 分页查询(时间排序)
+  static Future<List<Consumption>> getConsumptionByTime({
+    int pageNo = 1,
+    int pageSize = 20,
+    bool desc = false,
+  }) async {
+    assert(pageNo > 0 && pageSize > 0);
+    await requireInitialized();
+
+    return await _handle!.consumptions
+        .where(sort: desc ? Sort.desc : Sort.asc)
+        .sortByCreateTime()
+        .offset((pageNo - 1) * pageSize)
+        .limit(pageSize)
+        .findAll();
   }
 
   // endregion
@@ -58,7 +98,7 @@ abstract class DBStoreImpl {
     }
 
     final isar = await Isar.open(
-      [TagSchema],
+      [TagSchema, ConsumptionSchema],
       name: 'store',
       directory: appDir.path,
     );
