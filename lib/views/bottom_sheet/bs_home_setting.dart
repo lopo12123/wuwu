@@ -86,15 +86,6 @@ class BSHomeSetting extends GetView<_BSHomeSettingController> {
               const StyledText.XiaoBai('展示数量:', fontSize: 22)
                   .paddingOnly(right: 16),
               TextButton(
-                onPressed: () => controller.changeCount(3),
-                child: StyledText.ShouShu(
-                  '3',
-                  color: Palette.purple,
-                  fontSize: 16,
-                  underline: controller.count == 3,
-                ),
-              ),
-              TextButton(
                 onPressed: () => controller.changeCount(5),
                 child: StyledText.ShouShu(
                   '5',
@@ -119,6 +110,15 @@ class BSHomeSetting extends GetView<_BSHomeSettingController> {
                   color: Palette.purple,
                   fontSize: 16,
                   underline: controller.count == 15,
+                ),
+              ),
+              TextButton(
+                onPressed: () => controller.changeCount(20),
+                child: StyledText.ShouShu(
+                  '20',
+                  color: Palette.purple,
+                  fontSize: 16,
+                  underline: controller.count == 20,
                 ),
               ),
             ],

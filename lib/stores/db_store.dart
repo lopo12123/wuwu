@@ -57,20 +57,37 @@ abstract class DBStoreImpl {
   }
 
   /// 分页查询(时间排序)
+  ///
+  /// income:
+  /// - true 收入
+  /// - false 支出
+  /// - null 全部
   static Future<List<Consumption>> getConsumptionByTime({
     int pageNo = 1,
     int pageSize = 20,
     bool desc = false,
+    bool? income,
   }) async {
     assert(pageNo > 0 && pageSize > 0);
     await requireInitialized();
 
-    return await _handle!.consumptions
-        .where(sort: desc ? Sort.desc : Sort.asc)
-        .sortByCreateTime()
-        .offset((pageNo - 1) * pageSize)
-        .limit(pageSize)
-        .findAll();
+    var q = _handle!.consumptions.where(sort: desc ? Sort.desc : Sort.asc);
+
+    if (income != null) {
+      return await q
+          .incomeEqualTo(income)
+          .sortByCreateTime()
+          .offset((pageNo - 1) * pageSize)
+          .limit(pageSize)
+          .findAll();
+      ;
+    } else {
+      return await q
+          .sortByCreateTime()
+          .offset((pageNo - 1) * pageSize)
+          .limit(pageSize)
+          .findAll();
+    }
   }
 
   // endregion

@@ -7,8 +7,8 @@ class HomeSetting extends HiveObject {
   /// 展示类型
   ///
   /// - 0: 全部
-  /// - 1: 支出
-  /// - 2: 收入
+  /// - 1: 收入
+  /// - 2: 支出
   @HiveField(0)
   int type;
 

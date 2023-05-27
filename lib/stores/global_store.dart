@@ -13,6 +13,10 @@ class GlobalStoreImpl extends GetxService {
 
   // region 首页
   /// 展示类型
+  ///
+  /// - 0: 全部
+  /// - 1: 收入
+  /// - 2: 支出
   final RxInt homeListType = 0.obs;
 
   /// 展示数量
@@ -101,8 +105,10 @@ class GlobalStoreImpl extends GetxService {
       tags(await DBStoreImpl.getAllTags());
       SafePrint.info('[sync] tag done.');
     }
-    if(consumption) {
-      // todo
+    if (consumption) {
+      bool? isIncome = [null, true, false][homeListType.value];
+      recent20(await DBStoreImpl.getConsumptionByTime(income: isIncome));
+      SafePrint.info('[sync] recent20 done.');
     }
 
     if (toast) MyToast.success('刷新成功');

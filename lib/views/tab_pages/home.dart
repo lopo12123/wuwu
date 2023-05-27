@@ -2,15 +2,20 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:wuwu/components/common/input_box.dart';
 import 'package:wuwu/components/common/styled_text.dart';
+import 'package:wuwu/components/consumption_block.dart';
 import 'package:wuwu/components/nice_clock.dart';
 import 'package:wuwu/platform_spec/components/tool_bar.dart';
 import 'package:wuwu/stores/db_store.dart';
+import 'package:wuwu/stores/global_store.dart';
 import 'package:wuwu/stores/isar/consumption.dart';
 import 'package:wuwu/styles/palette.dart';
 import 'package:wuwu/utils/safe_print.dart';
 import 'package:wuwu/views/bottom_sheet/bs_consumption_create.dart';
 
 class HomePage extends StatelessWidget {
+  Iterable<Consumption> get displayList => GlobalStoreImpl.store.recent20
+      .take(GlobalStoreImpl.store.homeListCount.value);
+
   /// 新增一条记录
   Future<void> createConsumptionRecord() async {
     Consumption? consumption = await Get.bottomSheet(
@@ -18,7 +23,7 @@ class HomePage extends StatelessWidget {
       isScrollControlled: true,
     );
 
-    if(consumption != null) {
+    if (consumption != null) {
       DBStoreImpl.addConsumption(consumption);
     }
 
@@ -41,22 +46,20 @@ class HomePage extends StatelessWidget {
           niceClock.paddingSymmetric(vertical: 32),
           const Divider(height: 1, thickness: 1),
           Expanded(
-            child: ListView(
-              padding: const EdgeInsets.all(16),
-              children: [
-                StyledText.ShouShu('最近 n 笔消费'),
-                StyledText.ShouShu('最近 n 笔消费'),
-                StyledText.ShouShu('最近 n 笔消费'),
-                StyledText.ShouShu('最近 n 笔消费'),
-                ElevatedButton(
-                  onPressed: () async {
-                    var r = await DBStoreImpl.getConsumptionByTime();
-                    SafePrint.info(r);
-                  },
-                  child: StyledText.ShouShu('查询'),
-                ),
-              ],
+            child: Obx(
+              () => ListView(
+                padding: const EdgeInsets.all(16),
+                children: displayList
+                    .map((record) => ConsumptionBlock(record: record))
+                    .toList(),
+              ),
             ),
+          ),
+          ElevatedButton(
+            onPressed: () async {
+              GlobalStoreImpl.store.sync(consumption: true);
+            },
+            child: StyledText.ShouShu('查询'),
           ),
         ],
       ),
