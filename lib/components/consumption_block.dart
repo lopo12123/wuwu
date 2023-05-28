@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:wuwu/components/common/clickable.dart';
 import 'package:wuwu/components/common/styled_text.dart';
 import 'package:wuwu/stores/isar/consumption.dart';
 import 'package:wuwu/styles/palette.dart';
@@ -6,14 +7,20 @@ import 'package:wuwu/styles/palette.dart';
 class ConsumptionBlock extends StatelessWidget {
   final EdgeInsets? margin;
   final Consumption record;
+  final void Function(Consumption record)? onPressed;
 
   bool get income => record.income == true;
 
-  const ConsumptionBlock({super.key, required this.record, this.margin});
+  const ConsumptionBlock({
+    super.key,
+    required this.record,
+    this.margin,
+    this.onPressed,
+  });
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    var b = Container(
       margin: margin,
       padding: const EdgeInsets.all(8),
       decoration: BoxDecoration(
@@ -43,5 +50,9 @@ class ConsumptionBlock extends StatelessWidget {
         ],
       ),
     );
+
+    return onPressed == null
+        ? b
+        : Clickable.custom(b, onClick: () => onPressed!(record));
   }
 }
