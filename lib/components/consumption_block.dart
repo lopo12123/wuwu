@@ -11,6 +11,9 @@ class ConsumptionBlock extends StatelessWidget {
 
   bool get income => record.income == true;
 
+  String get desc =>
+      record.desc?.isNotEmpty == true ? record.desc! : '该条记录暂无描述信息';
+
   const ConsumptionBlock({
     super.key,
     required this.record,
@@ -30,6 +33,7 @@ class ConsumptionBlock extends StatelessWidget {
         borderRadius: BorderRadius.circular(8),
       ),
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Row(
             children: [
@@ -46,6 +50,12 @@ class ConsumptionBlock extends StatelessWidget {
                 fontSize: 12,
               ),
             ],
+          ),
+          const SizedBox(height: 4),
+          StyledText.ShouShu(
+            desc,
+            color: Palette.b60,
+            fontSize: 12,
           ),
         ],
       ),
