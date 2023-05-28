@@ -11,7 +11,44 @@ import 'package:wuwu/styles/palette.dart';
 import 'package:wuwu/utils/safe_print.dart';
 import 'package:wuwu/views/bottom_sheet/bs_consumption_create.dart';
 
-class HomePage extends StatelessWidget {
+class _HomeController extends GetxController {
+  final RxList<Consumption> today = <Consumption>[].obs;
+  final RxList<Consumption> thisWeek = <Consumption>[].obs;
+  final RxList<Consumption> thisMonth = <Consumption>[].obs;
+
+  Map<String, double> get todayInOut {
+    double i = 0, o = 0;
+    for (var item in today) {
+      item.income == true ? i += (item.amount ?? 0) : o += (item.amount ?? 0);
+    }
+    return {'in': i, 'out': o};
+  }
+
+  Map<String, double> get thisWeekInOut {
+    double i = 0, o = 0;
+    for (var item in thisWeek) {
+      item.income == true ? i += (item.amount ?? 0) : o += (item.amount ?? 0);
+    }
+    return {'in': i, 'out': o};
+  }
+
+  Map<String, double> get thisMonthInOut {
+    double i = 0, o = 0;
+    for (var item in thisMonth) {
+      item.income == true ? i += (item.amount ?? 0) : o += (item.amount ?? 0);
+    }
+    return {'in': i, 'out': o};
+  }
+
+  /// 刷新 今日/本周/本月 统计
+  Future<void> syncDayWeekMonth() async {
+    today(await DBStoreImpl.getConsumptionInNDay(1));
+    thisWeek(await DBStoreImpl.getConsumptionThisWeek());
+    thisMonth(await DBStoreImpl.getConsumptionThisMonth());
+  }
+}
+
+class HomePage extends GetView<_HomeController> {
   Iterable<Consumption> get displayList => GlobalStoreImpl.store.recent20
       .take(GlobalStoreImpl.store.homeListCount.value);
 
@@ -34,6 +71,8 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Get.put(_HomeController());
+
     return Scaffold(
       appBar: const ToolBar(extraActions: true),
       floatingActionButton: FloatingActionButton(
@@ -43,7 +82,43 @@ class HomePage extends StatelessWidget {
       ),
       body: Column(
         children: [
-          niceClock.paddingSymmetric(vertical: 32),
+          Obx(
+            () => Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                Column(
+                  children: [
+                    const StyledText.XiaoBai(
+                      '今日',
+                      fontSize: 22,
+                    ),
+                    StyledText.JBMono('+${controller.todayInOut['in']}'),
+                    StyledText.JBMono('-${controller.todayInOut['out']}'),
+                  ],
+                ),
+                Column(
+                  children: [
+                    const StyledText.XiaoBai(
+                      '本周',
+                      fontSize: 22,
+                    ),
+                    StyledText.JBMono('+${controller.thisWeekInOut['in']}'),
+                    StyledText.JBMono('-${controller.thisWeekInOut['out']}'),
+                  ],
+                ),
+                Column(
+                  children: [
+                    const StyledText.XiaoBai(
+                      '本月',
+                      fontSize: 22,
+                    ),
+                    StyledText.JBMono('+${controller.thisMonthInOut['in']}'),
+                    StyledText.JBMono('-${controller.thisMonthInOut['out']}'),
+                  ],
+                ),
+              ],
+            ),
+          ),
           const Divider(height: 1, thickness: 1),
           Expanded(
             child: Obx(
@@ -62,7 +137,8 @@ class HomePage extends StatelessWidget {
           ),
           ElevatedButton(
             onPressed: () async {
-              GlobalStoreImpl.store.sync(consumption: true);
+              // GlobalStoreImpl.store.sync(consumption: true);
+              controller.syncDayWeekMonth();
             },
             child: StyledText.ShouShu('查询'),
           ),

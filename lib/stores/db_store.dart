@@ -6,6 +6,19 @@ import 'package:wuwu/stores/isar/consumption.dart';
 import 'package:wuwu/stores/isar/tag.dart';
 import 'package:wuwu/utils/safe_print.dart';
 
+// n 天前的零点
+DateTime nDaysAgo(int n) {
+  assert(n > 0);
+  var today = DateTime.now();
+  return today.subtract(Duration(days: n)).copyWith(
+        hour: 0,
+        minute: 0,
+        second: 0,
+        microsecond: 0,
+        millisecond: 0,
+      );
+}
+
 abstract class DBStoreImpl {
   // region 标签
   /// 增加标签
@@ -87,6 +100,41 @@ abstract class DBStoreImpl {
           .limit(pageSize)
           .findAll();
     }
+  }
+
+  /// 查询n天内的记录
+  static Future<List<Consumption>> getConsumptionInNDay(int n) async {
+    assert(n > 0);
+    await requireInitialized();
+
+    return await _handle!.consumptions
+        .where()
+        .createTimeGreaterThan(nDaysAgo(n))
+        .findAll();
+  }
+
+  /// 查询本周内的记录
+  static Future<List<Consumption>> getConsumptionThisWeek() async {
+    await requireInitialized();
+
+    var today = DateTime.now();
+
+    return await _handle!.consumptions
+        .where()
+        .createTimeGreaterThan(nDaysAgo(today.weekday))
+        .findAll();
+  }
+
+  /// 查询本月内的记录
+  static Future<List<Consumption>> getConsumptionThisMonth() async {
+    await requireInitialized();
+
+    var today = DateTime.now();
+
+    return await _handle!.consumptions
+        .where()
+        .createTimeGreaterThan(nDaysAgo(today.day))
+        .findAll();
   }
 
   // endregion
