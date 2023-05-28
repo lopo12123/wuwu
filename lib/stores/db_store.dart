@@ -65,25 +65,24 @@ abstract class DBStoreImpl {
   static Future<List<Consumption>> getConsumptionByTime({
     int pageNo = 1,
     int pageSize = 20,
-    bool desc = false,
     bool? income,
   }) async {
     assert(pageNo > 0 && pageSize > 0);
     await requireInitialized();
 
-    var q = _handle!.consumptions.where(sort: desc ? Sort.desc : Sort.asc);
+    var q = _handle!.consumptions.where();
 
     if (income != null) {
       return await q
           .incomeEqualTo(income)
-          .sortByCreateTime()
+          .sortByCreateTimeDesc()
           .offset((pageNo - 1) * pageSize)
           .limit(pageSize)
           .findAll();
       ;
     } else {
       return await q
-          .sortByCreateTime()
+          .sortByCreateTimeDesc()
           .offset((pageNo - 1) * pageSize)
           .limit(pageSize)
           .findAll();

@@ -24,7 +24,8 @@ class HomePage extends StatelessWidget {
     );
 
     if (consumption != null) {
-      DBStoreImpl.addConsumption(consumption);
+      await DBStoreImpl.addConsumption(consumption);
+      GlobalStoreImpl.store.sync(consumption: true);
     }
 
     SafePrint.info('consumption: $consumption');
@@ -50,7 +51,12 @@ class HomePage extends StatelessWidget {
               () => ListView(
                 padding: const EdgeInsets.all(16),
                 children: displayList
-                    .map((record) => ConsumptionBlock(record: record))
+                    .map(
+                      (record) => ConsumptionBlock(
+                        record: record,
+                        margin: const EdgeInsets.symmetric(vertical: 4),
+                      ),
+                    )
                     .toList(),
               ),
             ),
