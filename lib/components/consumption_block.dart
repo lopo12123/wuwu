@@ -25,8 +25,8 @@ class ConsumptionBlock extends StatelessWidget {
       padding: const EdgeInsets.all(8),
       decoration: BoxDecoration(
         color: income
-            ? Palette.green.withOpacity(0.1)
-            : Palette.red.withOpacity(0.1),
+            ? Palette.red.withOpacity(0.1)
+            : Palette.green.withOpacity(0.1),
         borderRadius: BorderRadius.circular(8),
       ),
       child: Column(
@@ -36,7 +36,7 @@ class ConsumptionBlock extends StatelessWidget {
               Expanded(
                 child: StyledText.JBMono(
                   '${income ? '+' : '-'}${record.amount ?? '???'}',
-                  color: income ? Palette.green : Palette.red,
+                  color: income ? Palette.red : Palette.green,
                   fontSize: 14,
                 ),
               ),
